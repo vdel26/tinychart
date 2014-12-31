@@ -2,11 +2,12 @@
 var React = require('react');
 var EditorContainer = require('./components/EditorContainer');
 var MainContainer = require('./components/MainContainer');
+var sampleJson = require('./dataStore').sampleJson;
 
 var App = React.createClass({
   getInitialState: function () {
     return {
-      jsonData: ''
+      jsonData: sampleJson
     };
   },
 
@@ -25,4 +26,4 @@ var App = React.createClass({
   }
 });
 
-React.renderComponent(<App />, document.body);
+React.render(<App />, document.body);

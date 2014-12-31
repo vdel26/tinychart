@@ -6,7 +6,6 @@ var EditorContainer = React.createClass({
   render: function () {
     return (
       <div className="EditorContainer">
-        <h1>Editor</h1>
         <Editor newData={this.props.newData} />
       </div>
     );

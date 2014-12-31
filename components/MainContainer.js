@@ -1,12 +1,12 @@
 /** @jsx React.DOM */
 var React = require('react');
-var Test = require('./test');
+var LineChart = require('./LineChart');
 
 var MainContainer = React.createClass({
   render: function () {
     return (
       <div className="MainContainer">
-        <Test />
+        <LineChart jsonData={this.props.jsonData} />
         <p>{this.props.jsonData}</p>
       </div>
     );
