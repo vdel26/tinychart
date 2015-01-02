@@ -5,6 +5,7 @@ var MainContainer = require('./components/MainContainer');
 var sampleJson = require('./dataStore').sampleJson;
 
 var App = React.createClass({
+
   getInitialState: function () {
     return {
       jsonData: sampleJson
@@ -17,6 +18,7 @@ var App = React.createClass({
   },
 
   render: function () {
+    console.log(this.state.jsonData);
     return (
       <div className="App">
         <EditorContainer newData={this.newData} />
@@ -24,6 +26,7 @@ var App = React.createClass({
       </div>
     );
   }
+
 });
 
 React.render(<App />, document.body);

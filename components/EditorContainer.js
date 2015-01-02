@@ -3,6 +3,11 @@ var React = require('react');
 var Editor = require('./Editor');
 
 var EditorContainer = React.createClass({
+
+  propTypes: {
+    newData: React.PropTypes.func.isRequired,
+  },
+
   render: function () {
     return (
       <div className="EditorContainer">
@@ -10,6 +15,7 @@ var EditorContainer = React.createClass({
       </div>
     );
   }
+
 });
 
 module.exports = EditorContainer;

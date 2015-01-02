@@ -3,8 +3,18 @@ var React = require('react');
 var Chart = require('chart.js/Chart');
 var sampleJson = require('../dataStore').sampleJson;
 
-
 var LineChart = React.createClass({
+
+  propTypes: {
+    jsonData: React.PropTypes.object.isRequired,
+  },
+
+  getDefaultProps: function () {
+    return {
+      jsonData: sampleJson
+    };
+  },
+
   getInitialState: function () {
     return {
       chart: {}
@@ -14,8 +24,7 @@ var LineChart = React.createClass({
   initializeChart: function (props) {
     var el = this.getDOMNode();
     var ctx = el.getContext('2d');
-    var data = props.jsonData || sampleJson;
-    this.state.chart = new Chart(ctx).Line(data, {});
+    this.state.chart = new Chart(ctx).Line(props.jsonData, {});
   },
 
   componentDidMount: function () {
@@ -23,8 +32,6 @@ var LineChart = React.createClass({
   },
 
   componentWillReceiveProps: function (props) {
-    console.log('willreceive');
-    console.log(this.state.chart);
     var chart = this.state.chart;
     chart.destroy();
     this.initializeChart(props);
@@ -40,6 +47,7 @@ var LineChart = React.createClass({
       <canvas className='LineChart' width='600px' height='480px'></canvas>
     );
   }
+
 });
 
 module.exports = LineChart;
