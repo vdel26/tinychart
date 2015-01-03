@@ -22,7 +22,7 @@ var App = React.createClass({
 
 });
 
-var store = new DataStore();
+var store = new DataStore('chartpad');
 
 function render () {
   React.render(<App store={store} />, document.body);
