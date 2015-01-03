@@ -3,7 +3,7 @@ var React = require('react');
 
 var _ = require('lodash');
 var ace = require('brace');
-var sampleJson = require('../dataStore').sampleJson;
+var sampleJson = require('../sampleData.json');
 
 require('brace/theme/tomorrow_night');
 require('brace/mode/json');

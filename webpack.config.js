@@ -6,7 +6,8 @@ module.exports = {
   },
   module: {
     loaders: [
-      {test: /\.(js|jsx)$/, loader: 'jsx-loader'}
+      {test: /\.(js|jsx)$/, loader: 'jsx-loader'},
+      {test: /\.json$/, loader: 'json-loader'}
     ]
   },
   resolve: {

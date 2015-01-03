@@ -1,18 +1,11 @@
 /** @jsx React.DOM */
 var React = require('react');
 var Chart = require('chart.js/Chart');
-var sampleJson = require('../dataStore').sampleJson;
 
 var LineChart = React.createClass({
 
   propTypes: {
     jsonData: React.PropTypes.object.isRequired,
-  },
-
-  getDefaultProps: function () {
-    return {
-      jsonData: sampleJson
-    };
   },
 
   getInitialState: function () {

@@ -1,10 +1,11 @@
 {
-  "name": "Quickplot",
-  "version": "0.0.0",
+  "name": "Chartpad",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "webpack --progress --colors --watch",
+    "release": "webpack -p",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -18,6 +19,7 @@
     "react": "^0.12.1"
   },
   "devDependencies": {
+    "json-loader": "^0.5.1",
     "jsx-loader": "^0.12.2",
     "webpack": "^1.4.13",
     "webpack-dev-server": "^1.7.0"
