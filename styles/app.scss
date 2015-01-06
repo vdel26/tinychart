@@ -1,0 +1,129 @@
+/* variables */
+// $light-bg-grey: #eff2f4;
+$light-bg-grey: #E0E6EC;
+$dark-bg-grey: #262a2e;
+$purple: #8091C6;
+$green: #6BB6C4;
+$light-grey4: #E2E7EB;
+$light-grey2: #3B424A;
+$icon-dark-grey: #75808F;
+
+html, body {
+    width: 100%;
+    height: 100%;
+
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue';
+}
+h1, h2, h3, h4, h5 {
+  font-weight: 300;
+}
+.u-icon {
+  color: $icon-dark-grey;
+  height: 30px;
+  width: 30px;
+  background-size: 30px !important;
+  cursor: pointer;
+}
+
+.App {
+  display: flex;
+  height: 100%;
+}
+.App:before {
+  content: '';
+  opacity: 0;
+  transition: 300ms opacity;
+}
+.App.is-dimmed:before {
+  content: '';
+  position: fixed;
+  background: black;
+  opacity: 0.5;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index: 2;
+}
+
+.MainContainer {
+  flex: 1;
+
+  background-color: $light-bg-grey;
+  color: #E0E6EC;
+}
+.MainContainer-header {
+  position: relative;
+  padding: 1em 1em;
+  overflow: hidden;
+}
+.SettingsButton {
+  float: right;
+  background: url("../fonts/settings-icon.svg") no-repeat top left;
+}
+
+.ChartSelector li{
+  display: inline-block;
+  float: left;
+  list-style: none;
+  margin-left: 1em;
+}
+.ChartSelector-line {
+  background: url("../fonts/line-chart-icon.svg") no-repeat top left;
+}
+.ChartSelector-bar {
+  background: url("../fonts/bar-chart-icon.svg") no-repeat top left;
+}
+
+.EditorContainer {
+  width: 30%;
+  min-width: 500px;
+  overflow: scroll;
+
+  background-color: $dark-bg-grey;
+  color: #d9dfe2;
+}
+/* custom theme for ace editor */
+#editor .ace_editor {
+  background-color: $dark-bg-grey;
+}
+#editor .ace_variable {
+  color: $green;
+}
+#editor .ace_string {
+  color: $purple;
+}
+#editor .ace_constant.ace_numeric {
+  color: $light-grey4;
+}
+#editor .ace_gutter {
+  color: $light-grey2;
+}
+
+.Chart {
+  display: block;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.SettingsContainer {
+  position: fixed;
+  display: block;
+  width: 300px;
+  height: 400px;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 100px auto 0;
+  background: $light-bg-grey;
+  opacity: 0;
+  z-index: 3;
+  transition: 300ms transform ease;
+  transform: scale(0.7) translateY(25%);
+}
+.SettingsContainer.is-open {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}

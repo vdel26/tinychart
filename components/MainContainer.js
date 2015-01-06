@@ -10,32 +10,28 @@ var MainContainer = React.createClass({
 
   propTypes: {
     jsonData: React.PropTypes.object.isRequired,
+    currentChartType: React.PropTypes.string.isRequired
   },
 
-  getInitialState: function () {
-    return {
-      currentChartType: 'line'
-    };
-  },
-
-  switchChartType: function (toType) {
-    this.setState({ currentChartType: toType });
+  openSettings: function () {
+    this.props.openSettings();
   },
 
   render: function () {
     var currentChart;
-    if (this.state.currentChartType === 'line')
+    if (this.props.currentChartType === 'line')
       currentChart = <LineChart jsonData={this.props.jsonData} />;
-    else if (this.state.currentChartType === 'bar')
+    else if (this.props.currentChartType === 'bar')
       currentChart = <BarChart jsonData={this.props.jsonData} />;
 
     return (
       <div className="MainContainer">
         <header className="MainContainer-header">
-          <ChartSelector switchChartType={this.switchChartType} types={CHART_TYPES}/>
-          <div className="SettingsButton u-icon" data-icon="&#106;" />
+          <div className="SettingsButton u-icon" data-icon="&#106;" onClick={this.openSettings}/>
         </header>
         {currentChart}
+        <footer className="MainContainer-footer">
+        </footer>
       </div>
     );
   }
