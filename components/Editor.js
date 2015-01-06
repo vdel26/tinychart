@@ -20,7 +20,7 @@ var Editor = React.createClass({
     editor.setTheme('ace/theme/tomorrow_night');
 
     // paste code in editor as JSON
-    editor.setValue(JSON.stringify(sampleJson, null, '\t'));
+    editor.setValue(JSON.stringify(sampleJson, null, '\t'), -1);
 
     this.initEvents(editor);
   },

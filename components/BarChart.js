@@ -4,7 +4,7 @@ var Chart = require('chart.js/Chart');
 var ChartConfig = require('./ChartGlobalConfig');
 
 
-var LineChart = React.createClass({
+var BarChart = React.createClass({
 
   propTypes: {
     jsonData: React.PropTypes.object.isRequired,
@@ -20,7 +20,7 @@ var LineChart = React.createClass({
     var el = this.getDOMNode();
     var ctx = el.getContext('2d');
     Chart.defaults.global = ChartConfig;
-    this.state.chart = new Chart(ctx).Line(props.jsonData, {});
+    this.state.chart = new Chart(ctx).Bar(props.jsonData, {});
   },
 
   componentDidMount: function () {
@@ -40,10 +40,10 @@ var LineChart = React.createClass({
 
   render: function () {
     return (
-      <canvas className='Chart LineChart' width='600px' height='480px'></canvas>
+      <canvas className='Chart BarChart' width='600px' height='480px'></canvas>
     );
   }
 
 });
 
-module.exports = LineChart;
+module.exports = BarChart;

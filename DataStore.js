@@ -41,4 +41,4 @@ function persist (namespace, data) {
 
   var store = window.localStorage.getItem(namespace);
   return (store && JSON.parse(store)) || [];
-};
+}
