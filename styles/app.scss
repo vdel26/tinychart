@@ -1,3 +1,5 @@
+@import '../node_modules/node-bourbon/assets/stylesheets/bourbon';
+
 /* variables */
 $light-bg-grey: #E0E6EC;
 $dark-bg-grey: #262a2e;
@@ -10,8 +12,7 @@ $icon-hover: #545E6B;
 $icon-active: #7AB2EA;
 
 /* animations */
-@keyframes rotate-wheel { to { transform: rotate(-360deg); }  }
-@-webkit-keyframes rotate-wheel { to { transform: rotate(-360deg); }  }
+@include keyframes(rotate-wheel) { to { @include transform(rotate(-360deg)); }  }
 
 html, body {
     width: 100%;
@@ -37,7 +38,7 @@ h1, h2, h3, h4, h5 {
   cursor: pointer;
 }
 .App {
-  display: flex;
+  @include display(flex);
   height: 100%;
 }
 .App:before {
@@ -58,7 +59,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .MainContainer {
-  flex: 1;
+  @include flex(1);
 
   background-color: $light-bg-grey;
   color: #E0E6EC;
@@ -75,12 +76,11 @@ h1, h2, h3, h4, h5 {
   & > svg {
     stroke: $icon-dark-grey;
     fill: transparent;
-    transition: 200ms stroke ease;
+    @include transition(200ms stroke ease);
   }
   &:hover > svg {
     stroke: $icon-hover;
-    animation: rotate-wheel 4s linear 0s infinite;
-    -webkit-animation: rotate-wheel 2s linear 0s infinite;
+    @include animation(rotate-wheel 4s linear 0s infinite);
   }
 }
 
@@ -140,10 +140,10 @@ h1, h2, h3, h4, h5 {
   background: $light-bg-grey;
   opacity: 0;
   z-index: 3;
-  transition: 300ms transform ease;
-  transform: scale(0.7) translateY(25%);
+  @include transition(300ms transform ease);
+  @include transform(scale(0.7) translateY(25%));
 }
 .SettingsContainer.is-open {
   opacity: 1;
-  transform: scale(1) translateY(0);
+  @include transform(scale(1) translateY(0));
 }

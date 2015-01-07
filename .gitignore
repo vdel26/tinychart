@@ -2,3 +2,5 @@
 node_modules
 browser-bundle.js
 .sass-cache
+styles/*.map
+styles/*.css

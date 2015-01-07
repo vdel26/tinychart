@@ -1,10 +1,25 @@
 /* variables */
 /* animations */
-@keyframes rotate-wheel {
-  to {
-    transform: rotate(-360deg); } }
 @-webkit-keyframes rotate-wheel {
   to {
+    -webkit-transform: rotate(-360deg);
+    -moz-transform: rotate(-360deg);
+    -ms-transform: rotate(-360deg);
+    -o-transform: rotate(-360deg);
+    transform: rotate(-360deg); } }
+@-moz-keyframes rotate-wheel {
+  to {
+    -webkit-transform: rotate(-360deg);
+    -moz-transform: rotate(-360deg);
+    -ms-transform: rotate(-360deg);
+    -o-transform: rotate(-360deg);
+    transform: rotate(-360deg); } }
+@keyframes rotate-wheel {
+  to {
+    -webkit-transform: rotate(-360deg);
+    -moz-transform: rotate(-360deg);
+    -ms-transform: rotate(-360deg);
+    -o-transform: rotate(-360deg);
     transform: rotate(-360deg); } }
 html, body {
   width: 100%;
@@ -29,6 +44,12 @@ h1, h2, h3, h4, h5 {
   cursor: pointer; }
 
 .App {
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
   display: flex;
   height: 100%; }
 
@@ -49,6 +70,12 @@ h1, h2, h3, h4, h5 {
   z-index: 2; }
 
 .MainContainer {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
   flex: 1;
   background-color: #E0E6EC;
   color: #E0E6EC; }
@@ -63,11 +90,14 @@ h1, h2, h3, h4, h5 {
   .SettingsButton > svg {
     stroke: #75808F;
     fill: transparent;
+    -webkit-transition: 200ms stroke ease;
+    -moz-transition: 200ms stroke ease;
     transition: 200ms stroke ease; }
   .SettingsButton:hover > svg {
     stroke: #545E6B;
-    animation: rotate-wheel 4s linear 0s infinite;
-    -webkit-animation: rotate-wheel 2s linear 0s infinite; }
+    -webkit-animation: rotate-wheel 4s linear 0s infinite;
+    -moz-animation: rotate-wheel 4s linear 0s infinite;
+    animation: rotate-wheel 4s linear 0s infinite; }
 
 .ChartSelector li {
   display: inline-block;
@@ -121,11 +151,21 @@ h1, h2, h3, h4, h5 {
   background: #E0E6EC;
   opacity: 0;
   z-index: 3;
+  -webkit-transition: 300ms transform ease;
+  -moz-transition: 300ms transform ease;
   transition: 300ms transform ease;
+  -webkit-transform: scale(0.7) translateY(25%);
+  -moz-transform: scale(0.7) translateY(25%);
+  -ms-transform: scale(0.7) translateY(25%);
+  -o-transform: scale(0.7) translateY(25%);
   transform: scale(0.7) translateY(25%); }
 
 .SettingsContainer.is-open {
   opacity: 1;
+  -webkit-transform: scale(1) translateY(0);
+  -moz-transform: scale(1) translateY(0);
+  -ms-transform: scale(1) translateY(0);
+  -o-transform: scale(1) translateY(0);
   transform: scale(1) translateY(0); }
 
 /*# sourceMappingURL=app.css.map */
