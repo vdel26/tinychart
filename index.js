@@ -6,6 +6,7 @@ var SettingsContainer = require('./components/SettingsContainer');
 var DataStore = require('./DataStore');
 var CHART_TYPES = ['line', 'bar'];
 
+var icons = require('!!raw!./fonts/svg-icons-all.svg');
 
 var App = React.createClass({
 
@@ -37,6 +38,7 @@ var App = React.createClass({
 
     return (
       <div className="OuterContainer">
+        <span dangerouslySetInnerHTML={{__html: icons}}/>
         <div className={AppClasses}>
           <EditorContainer newData={this.newData} />
           <MainContainer jsonData={this.props.store.data} openSettings={this.openSettings} currentChartType={this.state.currentChartType} />

@@ -3,6 +3,7 @@ var React = require('react');
 var LineChart = require('./LineChart');
 var BarChart = require('./BarChart');
 var ChartSelector = require('./ChartSelector');
+var Utils = require('../Utils');
 var CHART_TYPES = ['line', 'bar'];
 
 
@@ -27,7 +28,9 @@ var MainContainer = React.createClass({
     return (
       <div className="MainContainer">
         <header className="MainContainer-header">
-          <div className="SettingsButton u-icon" data-icon="&#106;" onClick={this.openSettings}/>
+          <div className="SettingsButton"
+               onClick={this.openSettings}
+               dangerouslySetInnerHTML={{__html: Utils.svgHelper('#settings-icon')}}/>
         </header>
         {currentChart}
         <footer className="MainContainer-footer">

@@ -23,6 +23,7 @@
   "devDependencies": {
     "json-loader": "^0.5.1",
     "jsx-loader": "^0.12.2",
+    "raw-loader": "^0.5.1",
     "webpack": "^1.4.13",
     "webpack-dev-server": "^1.7.0"
   }

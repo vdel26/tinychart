@@ -1,5 +1,4 @@
 /* variables */
-// $light-bg-grey: #eff2f4;
 $light-bg-grey: #E0E6EC;
 $dark-bg-grey: #262a2e;
 $purple: #8091C6;
@@ -7,6 +6,12 @@ $green: #6BB6C4;
 $light-grey4: #E2E7EB;
 $light-grey2: #3B424A;
 $icon-dark-grey: #75808F;
+$icon-hover: #545E6B;
+$icon-active: #7AB2EA;
+
+/* animations */
+@keyframes rotate-wheel { to { transform: rotate(-360deg); }  }
+@-webkit-keyframes rotate-wheel { to { transform: rotate(-360deg); }  }
 
 html, body {
     width: 100%;
@@ -26,7 +31,11 @@ h1, h2, h3, h4, h5 {
   background-size: 30px !important;
   cursor: pointer;
 }
-
+.u-svgIcon {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
 .App {
   display: flex;
   height: 100%;
@@ -61,7 +70,18 @@ h1, h2, h3, h4, h5 {
 }
 .SettingsButton {
   float: right;
-  background: url("../fonts/settings-icon.svg") no-repeat top left;
+  //background: url("../fonts/settings-icon.svg") no-repeat top left;
+
+  & > svg {
+    stroke: $icon-dark-grey;
+    fill: transparent;
+    transition: 200ms stroke ease;
+  }
+  &:hover > svg {
+    stroke: $icon-hover;
+    animation: rotate-wheel 4s linear 0s infinite;
+    -webkit-animation: rotate-wheel 2s linear 0s infinite;
+  }
 }
 
 .ChartSelector li{

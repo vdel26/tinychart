@@ -1,4 +1,11 @@
 /* variables */
+/* animations */
+@keyframes rotate-wheel {
+  to {
+    transform: rotate(-360deg); } }
+@-webkit-keyframes rotate-wheel {
+  to {
+    transform: rotate(-360deg); } }
 html, body {
   width: 100%;
   height: 100%;
@@ -14,6 +21,11 @@ h1, h2, h3, h4, h5 {
   height: 30px;
   width: 30px;
   background-size: 30px !important;
+  cursor: pointer; }
+
+.u-svgIcon {
+  width: 30px;
+  height: 30px;
   cursor: pointer; }
 
 .App {
@@ -47,8 +59,15 @@ h1, h2, h3, h4, h5 {
   overflow: hidden; }
 
 .SettingsButton {
-  float: right;
-  background: url("../fonts/settings-icon.svg") no-repeat top left; }
+  float: right; }
+  .SettingsButton > svg {
+    stroke: #75808F;
+    fill: transparent;
+    transition: 200ms stroke ease; }
+  .SettingsButton:hover > svg {
+    stroke: #545E6B;
+    animation: rotate-wheel 4s linear 0s infinite;
+    -webkit-animation: rotate-wheel 2s linear 0s infinite; }
 
 .ChartSelector li {
   display: inline-block;
