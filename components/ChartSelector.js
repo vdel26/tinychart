@@ -1,6 +1,6 @@
 /** @jsx React.DOM */
 var React = require('react');
-
+var Utils= require('../Utils');
 
 var ChartSelector = React.createClass({
 
@@ -15,13 +15,17 @@ var ChartSelector = React.createClass({
 
   render: function () {
     var options = this.props.types.map(function (type) {
-      return <li className={"u-icon ChartSelector-" + type} onClick={this.onSelect.bind(null, type)} />;
+      return (
+        <button className="ChartSelector-button"
+                onClick={this.onSelect.bind(null, type)}
+                dangerouslySetInnerHTML={{__html: Utils.svgHelper('#' + type + '-chart-icon')}}/>
+      );
     }.bind(this));
 
     return (
-      <ul className='ChartSelector'>
+      <div className='ChartSelector'>
         {options}
-      </ul>
+      </div>
     );
   }
 

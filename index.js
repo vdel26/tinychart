@@ -29,6 +29,10 @@ var App = React.createClass({
     this.setState({ currentChartType: toType });
   },
 
+  closeSettings: function (evt) {
+    if (this.state.settingsIsOpen) this.setState({ settingsIsOpen: false });
+  },
+
   render: function () {
     var cx = React.addons.classSet;
     var AppClasses = cx({
@@ -39,7 +43,7 @@ var App = React.createClass({
     return (
       <div className="OuterContainer">
         <span dangerouslySetInnerHTML={{__html: icons}}/>
-        <div className={AppClasses}>
+        <div className={AppClasses} onClick={this.closeSettings} ref="app">
           <EditorContainer newData={this.newData} />
           <MainContainer jsonData={this.props.store.data} openSettings={this.openSettings} currentChartType={this.state.currentChartType} />
         </div>

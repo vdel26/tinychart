@@ -19,7 +19,11 @@ var SettingsContainer = React.createClass({
 
     return (
       <div className={SettingsContainerClasses}>
-        <ChartSelector switchChartType={this.props.switchChartType} types={this.props.types}/>
+        <div className="SettingsContainer-content">
+          <ChartSelector switchChartType={this.props.switchChartType} types={this.props.types} />
+          <button className="SettingsContainer-button SettingsContainer-button--default">Reset Data</button>
+          <button className="SettingsContainer-button SettingsContainer-button--blue">Download Chart</button>
+        </div>
       </div>
     );
   }

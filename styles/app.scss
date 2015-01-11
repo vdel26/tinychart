@@ -1,15 +1,21 @@
 @import '../node_modules/node-bourbon/assets/stylesheets/bourbon';
 
 /* variables */
+$font: 'Avenir';
+$radius: 4px;
+
+/* colors */
 $light-bg-grey: #E0E6EC;
 $dark-bg-grey: #262a2e;
 $purple: #8091C6;
 $green: #6BB6C4;
+$white: #FFF;
 $light-grey4: #E2E7EB;
 $light-grey2: #3B424A;
 $icon-dark-grey: #75808F;
 $icon-hover: #545E6B;
 $icon-active: #7AB2EA;
+
 
 /* animations */
 @include keyframes(rotate-wheel) { to { @include transform(rotate(-360deg)); }  }
@@ -20,22 +26,23 @@ html, body {
 
     margin: 0;
     padding: 0;
-    font-family: 'Helvetica Neue';
+    font-family: $font;
 }
 h1, h2, h3, h4, h5 {
   font-weight: 300;
 }
-.u-icon {
-  color: $icon-dark-grey;
-  height: 30px;
-  width: 30px;
-  background-size: 30px !important;
-  cursor: pointer;
-}
+// .u-icon {
+//   color: $icon-dark-grey;
+//   height: 30px;
+//   width: 30px;
+//   background-size: 30px !important;
+//   cursor: pointer;
+// }
 .u-svgIcon {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
+  fill: transparent;
 }
 .App {
   @include display(flex);
@@ -50,7 +57,7 @@ h1, h2, h3, h4, h5 {
   content: '';
   position: fixed;
   background: black;
-  opacity: 0.5;
+  opacity: 0.3;
   top:0;
   left:0;
   width:100%;
@@ -71,7 +78,6 @@ h1, h2, h3, h4, h5 {
 }
 .SettingsButton {
   float: right;
-  //background: url("../fonts/settings-icon.svg") no-repeat top left;
 
   & > svg {
     stroke: $icon-dark-grey;
@@ -80,21 +86,36 @@ h1, h2, h3, h4, h5 {
   }
   &:hover > svg {
     stroke: $icon-hover;
-    @include animation(rotate-wheel 4s linear 0s infinite);
+    @include animation(rotate-wheel 3s linear 0s infinite);
+  }
+
+  &:active > svg {
+    stroke: $icon-active;
   }
 }
+.ChartSelector {
+  overflow: hidden;
 
-.ChartSelector li{
-  display: inline-block;
-  float: left;
-  list-style: none;
-  margin-left: 1em;
+  &:before {
+    content: 'Chart type';
+    color: #59A2E6;
+    margin-right: 1em;
+  }
 }
-.ChartSelector-line {
-  background: url("../fonts/line-chart-icon.svg") no-repeat top left;
-}
-.ChartSelector-bar {
-  background: url("../fonts/bar-chart-icon.svg") no-repeat top left;
+.ChartSelector-button {
+  @include background-image(linear-gradient(28deg, #D9DEE5 0%, #E2E7EE 100%));
+  border: 1px solid #B8C6D3;
+  box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,0.50);
+  padding: 1em;
+  outline: none;
+  cursor: pointer;
+
+  &:first-child {
+    border-radius: $radius 0px 0px $radius;
+  }
+  &:last-child {
+    border-radius: 0px $radius $radius 0px;
+  }
 }
 
 .EditorContainer {
@@ -131,19 +152,69 @@ h1, h2, h3, h4, h5 {
 .SettingsContainer {
   position: fixed;
   display: block;
-  width: 300px;
-  height: 400px;
-  top: 0;
-  left: 0;
-  right: 0;
-  margin: 100px auto 0;
+  width: 250px;
+  height: 270px;
+  top: 2.5em;
+  right: 1.5em;
+  border-radius: $radius;
   background: $light-bg-grey;
   opacity: 0;
   z-index: 3;
+  color: $icon-dark-grey;
+  box-shadow: 0 8px 13px rgba(0,0,0,0.36),0 0 0 1px rgba(0,0,0,0.06);
   @include transition(300ms transform ease);
-  @include transform(scale(0.7) translateY(25%));
+  @include transform(scale(0.7) translateY(-25%) translateX(25%));
 }
 .SettingsContainer.is-open {
   opacity: 1;
   @include transform(scale(1) translateY(0));
+}
+.SettingsContainer-content {
+  @include display(flex);
+  @include flex-direction(column);
+  @include justify-content(space-between);
+  @include align-items(center);
+  position: relative;
+  padding: 2em 2em;
+}
+.SettingsContainer-button {
+  width: 100%;
+  height: 44px;
+  margin-top: 2em;
+  outline: none;
+  cursor: pointer;
+  border-radius: $radius;
+  font-size: 1em;
+  font-family: $font;
+  @include user-select(none);
+}
+.SettingsContainer-button--default {
+  @include background-image(linear-gradient(28deg, #D9DEE5 0%, #E2E7EE 100%));
+  border: 1px solid #B8C6D3;
+  box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,0.50);
+  color: $icon-dark-grey;
+  &:hover {
+    @include background-image(linear-gradient(28deg, #ECEEF1 0%, #DDE3EA 100%));
+    box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,0.30);
+    color: #545E6B;
+  }
+  &:active {
+    @include background-image(linear-gradient(28deg, #E4E9EE 0%, #EAEEF2 100%));
+    box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,0.30);
+    color: #4996E3;
+  }
+}
+.SettingsContainer-button--blue {
+  @include background-image(linear-gradient(-155deg, #58ACD9 0%, #7BA8FF 100%));
+  border: 1px solid #719BEC;
+  box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,0.15);
+  color: #FFFFFF;
+  &:hover {
+    @include background-image(linear-gradient(-155deg, #58ACD9 0%, #7BA8FF 50%));
+    box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,0.12);
+  }
+  &:active {
+    @include background-image(linear-gradient(24deg, #58ACD9 0%, #7BA8FF 100%));
+    box-shadow: inset 0px -1px 0px 0px rgba(255,255,255,0.12);
+  }
 }

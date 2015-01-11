@@ -18,6 +18,12 @@ var MainContainer = React.createClass({
     this.props.openSettings();
   },
 
+  shouldComponentUpdate: function (nextProps, nextState) {
+    if (nextProps.jsonData !== this.props.jsonData) return true;
+    if (nextProps.currentChartType !== this.props.currentChartType) return true;
+    else return false;
+  },
+
   render: function () {
     var currentChart;
     if (this.props.currentChartType === 'line')
