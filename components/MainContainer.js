@@ -20,7 +20,7 @@ var MainContainer = React.createClass({
 
   shouldComponentUpdate: function (nextProps, nextState) {
     if (nextProps.jsonData !== this.props.jsonData) return true;
-    if (nextProps.currentChartType !== this.props.currentChartType) return true;
+    else if (nextProps.currentChartType !== this.props.currentChartType) return true;
     else return false;
   },
 

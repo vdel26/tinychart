@@ -50,19 +50,22 @@ h1, h2, h3, h4, h5 {
 
 .App:before {
   content: '';
-  opacity: 0;
-  transition: 300ms opacity; }
-
-.App.is-dimmed:before {
-  content: '';
   position: fixed;
   background: black;
-  opacity: 0.3;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 2; }
+  z-index: 2;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: all 300ms ease;
+  -moz-transition: all 300ms ease;
+  transition: all 300ms ease; }
+
+.App.is-dimmed:before {
+  visibility: visible;
+  opacity: 0.3; }
 
 .MainContainer {
   -webkit-box-flex: 1;
@@ -157,9 +160,9 @@ h1, h2, h3, h4, h5 {
   z-index: 3;
   color: #75808F;
   box-shadow: 0 8px 13px rgba(0, 0, 0, 0.36), 0 0 0 1px rgba(0, 0, 0, 0.06);
-  -webkit-transition: 300ms transform ease;
-  -moz-transition: 300ms transform ease;
-  transition: 300ms transform ease;
+  -webkit-transition: 300ms all cubic-bezier(0.34, 1.61, 0.7, 1);
+  -moz-transition: 300ms all cubic-bezier(0.34, 1.61, 0.7, 1);
+  transition: 300ms all cubic-bezier(0.34, 1.61, 0.7, 1);
   -webkit-transform: scale(0.7) translateY(-25%) translateX(25%);
   -moz-transform: scale(0.7) translateY(-25%) translateX(25%);
   -ms-transform: scale(0.7) translateY(-25%) translateX(25%);
