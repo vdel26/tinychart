@@ -27,6 +27,11 @@ DataStore.prototype.update = function (newData) {
   this.inform();
 };
 
+DataStore.prototype.resetData = function () {
+  this.data = sampleJson;
+  this.inform();
+};
+
 module.exports = DataStore;
 
 

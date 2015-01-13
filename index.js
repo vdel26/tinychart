@@ -21,6 +21,11 @@ var App = React.createClass({
     this.props.store.update(data);
   },
 
+  resetData: function () {
+    this.props.store.resetData();
+    this.refs.EditorContainer.resetEditorData();
+  },
+
   openSettings: function () {
     this.setState({ settingsIsOpen: true });
   },
@@ -44,10 +49,13 @@ var App = React.createClass({
       <div className="OuterContainer">
         <span dangerouslySetInnerHTML={{__html: icons}}/>
         <div className={AppClasses} onClick={this.closeSettings} ref="app">
-          <EditorContainer newData={this.newData} />
+          <EditorContainer newData={this.newData} ref="EditorContainer" />
           <MainContainer jsonData={this.props.store.data} openSettings={this.openSettings} currentChartType={this.state.currentChartType} />
         </div>
-        <SettingsContainer isOpen={this.state.settingsIsOpen} types={CHART_TYPES} switchChartType={this.switchChartType} />
+        <SettingsContainer isOpen={this.state.settingsIsOpen}
+                           types={CHART_TYPES}
+                           switchChartType={this.switchChartType}
+                           resetData={this.resetData} />
       </div>
     );
   }

@@ -96,14 +96,15 @@ h1, h2, h3, h4, h5 {
 }
 .ChartSelector {
   overflow: hidden;
-
-  &:before {
-    content: 'Chart type';
-    color: #59A2E6;
-    margin-right: 1em;
-  }
+  width: 100%;
+  // &:before {
+  //   content: 'Chart type';
+  //   color: #59A2E6;
+  //   margin-right: 1em;
+  // }
 }
 .ChartSelector-button {
+  width: 50%;
   @include background-image(linear-gradient(28deg, #D9DEE5 0%, #E2E7EE 100%));
   border: 1px solid #B8C6D3;
   box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,0.50);

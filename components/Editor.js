@@ -14,8 +14,15 @@ var Editor = React.createClass({
     newData: React.PropTypes.func.isRequired,
   },
 
+  getInitialState: function () {
+    return {
+      editor: {}
+    };
+  },
+
   componentDidMount: function () {
     var editor = ace.edit('editor');
+    this.state.editor = editor;
     editor.getSession().setMode('ace/mode/json');
     editor.setTheme('ace/theme/tomorrow_night');
 
@@ -28,13 +35,20 @@ var Editor = React.createClass({
   initEvents: function (editor) {
     var onNewDataDebounced = _.debounce(this.onNewData, 300);
     editor.getSession().on('change', function (evt) {
-      onNewDataDebounced(editor.getValue());
+      // skip callback if event was triggered using editor.setValue()
+      if (editor.curOp && editor.curOp.command.name){
+        onNewDataDebounced(editor.getValue());
+      }
     });
   },
 
   onNewData: function (data) {
     // get code as string save it as JS object
     this.props.newData(JSON.parse(data));
+  },
+
+  resetData: function() {
+    this.state.editor.setValue(JSON.stringify(sampleJson, null, '\t'), -1);
   },
 
   render: function () {

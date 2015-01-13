@@ -8,10 +8,14 @@ var EditorContainer = React.createClass({
     newData: React.PropTypes.func.isRequired,
   },
 
+  resetEditorData: function () {
+    this.refs.editor.resetData();
+  },
+
   render: function () {
     return (
       <div className="EditorContainer">
-        <Editor newData={this.props.newData} />
+        <Editor newData={this.props.newData} ref="editor" />
       </div>
     );
   }
