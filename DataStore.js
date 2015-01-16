@@ -1,14 +1,20 @@
 'use strict';
 
 var _ = require('lodash');
+var Utils = require('./Utils');
 var sampleJson = require('./sampleData.json');
 
 
 function DataStore (key) {
   this.key = key;
   // initialize with sample data
-  this.data = sampleJson;
+  this.initialize();
   this.onChanges = [];
+}
+
+DataStore.prototype.initialize = function () {
+  this.data = _.cloneDeep(sampleJson);
+  assignColors(this.data, Utils.colors);
 }
 
 DataStore.prototype.subscribe = function (cb) {
@@ -23,12 +29,13 @@ DataStore.prototype.inform = function () {
 
 DataStore.prototype.update = function (newData) {
   this.data = newData;
+  assignColors(this.data, Utils.colors);
   persist(this.key, this.data);
   this.inform();
 };
 
 DataStore.prototype.resetData = function () {
-  this.data = sampleJson;
+  this.initialize();
   this.inform();
 };
 
@@ -46,4 +53,13 @@ function persist (namespace, data) {
 
   var store = window.localStorage.getItem(namespace);
   return (store && JSON.parse(store)) || [];
+}
+
+// assign a colorscheme from the ones available to each dataset
+function assignColors (data, colors) {
+  for (var i=0; i < data.datasets.length; i++) {
+    for (var prop in Utils.colors[i]) {
+      data.datasets[i][prop] = colors[i][prop];
+    }
+  }
 }

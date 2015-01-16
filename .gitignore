@@ -4,3 +4,4 @@ browser-bundle.js
 .sass-cache
 styles/*.map
 styles/*.css
+*.bkp.json

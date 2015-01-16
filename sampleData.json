@@ -2,23 +2,9 @@
   "labels": ["January", "February", "March", "April", "May", "June", "July"],
   "datasets": [
     {
-      "label": "My First dataset",
-      "fillColor": "rgba(163,142,243,0.1)",
-      "strokeColor": "rgba(163,142,243,1)",
-      "pointColor": "rgba(163,142,243,1)",
-      "pointStrokeColor": "#fff",
-      "pointHighlightFill": "#fff",
-      "pointHighlightStroke": "rgba(163,142,243,1)",
       "data": [65, 59, 80, 81, 56, 55, 40]
     },
     {
-      "label": "My Second dataset",
-      "fillColor": "rgba(122,178,234,0.1)",
-      "strokeColor": "rgba(122,178,234,1)",
-      "pointColor": "rgba(122,178,234,1)",
-      "pointStrokeColor": "#fff",
-      "pointHighlightFill": "#fff",
-      "pointHighlightStroke": "rgba(122,178,234,1)",
       "data": [28, 48, 40, 19, 86, 27, 90]
     }
   ]
