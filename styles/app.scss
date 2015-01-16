@@ -31,18 +31,13 @@ html, body {
 h1, h2, h3, h4, h5 {
   font-weight: 300;
 }
-// .u-icon {
-//   color: $icon-dark-grey;
-//   height: 30px;
-//   width: 30px;
-//   background-size: 30px !important;
-//   cursor: pointer;
-// }
+
 .u-svgIcon {
   width: 20px;
   height: 20px;
   cursor: pointer;
-  fill: transparent;
+  fill: #75808F;
+  stroke: #75808F;
 }
 .App {
   @include display(flex);
@@ -97,11 +92,6 @@ h1, h2, h3, h4, h5 {
 .ChartSelector {
   overflow: hidden;
   width: 100%;
-  // &:before {
-  //   content: 'Chart type';
-  //   color: #59A2E6;
-  //   margin-right: 1em;
-  // }
 }
 .ChartSelector-button {
   width: 50%;
@@ -111,12 +101,29 @@ h1, h2, h3, h4, h5 {
   padding: 1em;
   outline: none;
   cursor: pointer;
+  @include user-select(none);
 
   &:first-child {
     border-radius: $radius 0px 0px $radius;
   }
   &:last-child {
     border-radius: 0px $radius $radius 0px;
+  }
+  &:hover {
+    @include background-image(linear-gradient(28deg, #ECEEF1 0%, #DDE3EA 100%));
+    box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,0.30);
+    & > svg{
+      fill: #545E6B;
+      stroke: #545E6B;
+    }
+  }
+  &:active {
+    @include background-image(linear-gradient(28deg, #E4E9EE 0%, #EAEEF2 100%));
+    box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,0.30);
+    & > svg{
+      fill: #4996E3;
+      stroke: #4996E3;
+    }
   }
 }
 
