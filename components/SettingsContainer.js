@@ -11,6 +11,15 @@ var SettingsContainer = React.createClass({
     resetData: React.PropTypes.func.isRequired
   },
 
+  componentDidUpdate: function () {
+    setTimeout(function () {
+      // wait for canvas rendering before getting the image url
+      var canvas = document.querySelector('canvas');
+      var url = canvas.toDataURL();
+      this.refs.download.getDOMNode().href = url;
+    }.bind(this), 1000);
+  },
+
   render: function () {
     var cx = React.addons.classSet;
     var SettingsContainerClasses = cx({
@@ -23,7 +32,7 @@ var SettingsContainer = React.createClass({
         <div className="SettingsContainer-content">
           <ChartSelector switchChartType={this.props.switchChartType} types={this.props.types} />
           <button className="SettingsContainer-button SettingsContainer-button--default" onClick={this.props.resetData}>Reset Data</button>
-          <button className="SettingsContainer-button SettingsContainer-button--blue">Download Chart</button>
+          <a className="SettingsContainer-button SettingsContainer-button--blue" download="chartpad.png" ref="download">Download Chart</a>
         </div>
       </div>
     );

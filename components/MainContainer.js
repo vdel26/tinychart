@@ -31,9 +31,16 @@ var MainContainer = React.createClass({
     else if (this.props.currentChartType === 'bar')
       currentChart = <BarChart jsonData={this.props.jsonData} />;
 
+    var cx = React.addons.classSet;
+    var FlashMessageClasses = cx({
+      'FlashMessage': true,
+      'is-visible': true,
+    });
+
     return (
       <div className="MainContainer">
         <header className="MainContainer-header">
+          <span className={FlashMessageClasses}>Saved!</span>
           <div className="SettingsButton"
                onClick={this.openSettings}
                dangerouslySetInnerHTML={{__html: Utils.svgHelper('#settings-icon')}}/>
