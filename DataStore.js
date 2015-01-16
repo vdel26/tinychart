@@ -13,7 +13,13 @@ function DataStore (key) {
 }
 
 DataStore.prototype.initialize = function () {
-  this.data = _.cloneDeep(sampleJson);
+  if (localStore(this.key)) {
+    this.data = localStore(this.key);
+  }
+  else {
+    this.data = _.cloneDeep(sampleJson);
+  }
+
   assignColors(this.data, Utils.colors);
 }
 
@@ -30,11 +36,12 @@ DataStore.prototype.inform = function () {
 DataStore.prototype.update = function (newData) {
   this.data = newData;
   assignColors(this.data, Utils.colors);
-  persist(this.key, this.data);
+  localStore(this.key, this.data);
   this.inform();
 };
 
 DataStore.prototype.resetData = function () {
+  window.localStorage.removeItem(this.key);
   this.initialize();
   this.inform();
 };
@@ -44,15 +51,15 @@ module.exports = DataStore;
 
 // Helper functions
 
-// save data to localstorage   – persist('my-data')
-// get data from localstorage  – persist('my-data', 'foobar')
-function persist (namespace, data) {
+// save data to localstorage   – localStore('my-data')
+// get data from localstorage  – localStore('my-data', 'foobar')
+function localStore (namespace, data) {
   if (data) {
     return window.localStorage.setItem(namespace, JSON.stringify(data));
   }
 
   var store = window.localStorage.getItem(namespace);
-  return (store && JSON.parse(store)) || [];
+  return (store && JSON.parse(store)) || "";
 }
 
 // assign a colorscheme from the ones available to each dataset
