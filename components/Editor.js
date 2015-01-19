@@ -14,15 +14,9 @@ var Editor = React.createClass({
     initialData: React.PropTypes.object.isRequired
   },
 
-  getInitialState: function () {
-    return {
-      editor: {}
-    };
-  },
-
   componentDidMount: function () {
     var editor = ace.edit('editor');
-    this.state.editor = editor;
+    this.editor = editor;
     editor.getSession().setMode('ace/mode/json');
     editor.setTheme('ace/theme/tomorrow_night');
 
@@ -33,7 +27,7 @@ var Editor = React.createClass({
   },
 
   componentWillReceiveProps: function (nextProps) {
-    this.state.editor.setValue(JSON.stringify(nextProps.initialData, null, '\t'), -1);
+    this.editor.setValue(JSON.stringify(nextProps.initialData, null, '\t'), -1);
   },
 
   initEvents: function (editor) {

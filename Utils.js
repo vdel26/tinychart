@@ -9,7 +9,7 @@ module.exports = {
   },
 
   // Chart colors for datasets
-  colors: [
+  colorschemes: [
     {
       fillColor: "rgba(163,142,243,0.1)",
       strokeColor: "rgba(163,142,243,1)",
@@ -50,6 +50,17 @@ module.exports = {
       pointHighlightFill: "#fff",
       pointHighlightStroke: "rgba(122,178,234,1)",
     }
-  ]
+  ],
+
+  // assign colorschemes to datasets
+  assignColors: function (input, colors) {
+    var output = _.clone(input);
+    for (var i=0; i < output.datasets.length; i++) {
+      for (var prop in colors[i]) {
+        output.datasets[i][prop] = colors[i][prop];
+      }
+    }
+    return output;
+  }
 
 };

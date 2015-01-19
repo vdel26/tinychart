@@ -7,8 +7,7 @@ var EditorContainer = React.createClass({
 
   propTypes: {
     store: React.PropTypes.object.isRequired,
-    newData: React.PropTypes.func.isRequired,
-    initialData: React.PropTypes.object.isRequired
+    newData: React.PropTypes.func.isRequired
   },
 
   getInitialState: function () {
@@ -21,6 +20,11 @@ var EditorContainer = React.createClass({
 
   componentDidMount: function () {
     this.props.store.subscribe('reset', this.resetEditorData);
+  },
+
+  shouldComponentUpdate: function (nextProps, nextState) {
+    if (nextState.initialData !== this.state.initialData) return true;
+    return false;
   },
 
   render: function () {

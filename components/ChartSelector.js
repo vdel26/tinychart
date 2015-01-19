@@ -14,6 +14,12 @@ var ChartSelector = React.createClass({
   },
 
   render: function () {
+    var cx = React.addons.classSet;
+    var FlashMessageClasses = cx({
+      'ChartSelector-button': true,
+      'is-selected': true,
+    });
+
     var options = this.props.types.map(function (type) {
       return (
         <button className="ChartSelector-button"

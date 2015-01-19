@@ -2,6 +2,7 @@
 var React = require('react');
 var Chart = require('chart.js/Chart');
 var ChartConfig = require('./ChartGlobalConfig');
+var Utils = require('../Utils');
 
 
 var BarChart = React.createClass({
@@ -10,17 +11,12 @@ var BarChart = React.createClass({
     jsonData: React.PropTypes.object.isRequired,
   },
 
-  getInitialState: function () {
-    return {
-      chart: {}
-    };
-  },
-
   initializeChart: function (props) {
     var el = this.getDOMNode();
     var ctx = el.getContext('2d');
     Chart.defaults.global = ChartConfig;
-    this.state.chart = new Chart(ctx).Bar(props.jsonData, {});
+    var data = Utils.assignColors(props.jsonData, Utils.colorschemes);
+    this.chart = new Chart(ctx).Bar(data, {});
   },
 
   componentDidMount: function () {
@@ -28,13 +24,13 @@ var BarChart = React.createClass({
   },
 
   componentWillReceiveProps: function (props) {
-    var chart = this.state.chart;
+    var chart = this.chart;
     chart.destroy();
     this.initializeChart(props);
   },
 
   componentWillUnmount: function () {
-    var chart = this.state.chart;
+    var chart = this.chart;
     chart.destroy();
   },
 

@@ -47,8 +47,8 @@ var App = React.createClass({
     return (
       <div className="OuterContainer">
         <span dangerouslySetInnerHTML={{__html: icons}}/>
-        <div className={AppClasses} onClick={this.closeSettings} ref="app">
-          <EditorContainer store={this.props.store} initialData={this.props.store.getData()} newData={this.newData} />
+        <div className={AppClasses} onClick={this.closeSettings}>
+          <EditorContainer store={this.props.store} newData={this.newData} />
           <MainContainer store={this.props.store} openSettings={this.openSettings} currentChartType={this.state.currentChartType} />
         </div>
         <SettingsContainer isOpen={this.state.settingsIsOpen}

@@ -19,8 +19,6 @@ DataStore.prototype.initialize = function () {
   else {
     this.data = _.cloneDeep(sampleJson);
   }
-
-  assignColors(this.data, Utils.colors);
 }
 
 DataStore.prototype.subscribe = function (eventType, cb) {
@@ -54,7 +52,6 @@ DataStore.prototype.getData = function () {
 
 DataStore.prototype.update = function (newData) {
   this.data = newData;
-  assignColors(this.data, Utils.colors);
   localStore(this.key, this.data);
   this.inform('change');
 };
@@ -79,13 +76,4 @@ function localStore (namespace, data) {
 
   var store = window.localStorage.getItem(namespace);
   return (store && JSON.parse(store)) || "";
-}
-
-// assign a colorscheme from the ones available to each dataset
-function assignColors (data, colors) {
-  for (var i=0; i < data.datasets.length; i++) {
-    for (var prop in Utils.colors[i]) {
-      data.datasets[i][prop] = colors[i][prop];
-    }
-  }
 }
