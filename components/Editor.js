@@ -3,7 +3,6 @@ var React = require('react');
 
 var _ = require('lodash');
 var ace = require('brace');
-var sampleJson = require('../sampleData.json');
 
 require('brace/theme/tomorrow_night');
 require('brace/mode/json');
@@ -12,6 +11,7 @@ var Editor = React.createClass({
 
   propTypes: {
     newData: React.PropTypes.func.isRequired,
+    initialData: React.PropTypes.object.isRequired
   },
 
   getInitialState: function () {
@@ -27,9 +27,13 @@ var Editor = React.createClass({
     editor.setTheme('ace/theme/tomorrow_night');
 
     // paste code in editor as JSON
-    editor.setValue(JSON.stringify(sampleJson, null, '\t'), -1);
+    editor.setValue(JSON.stringify(this.props.initialData, null, '\t'), -1);
 
     this.initEvents(editor);
+  },
+
+  componentWillReceiveProps: function (nextProps) {
+    this.state.editor.setValue(JSON.stringify(nextProps.initialData, null, '\t'), -1);
   },
 
   initEvents: function (editor) {
@@ -45,10 +49,6 @@ var Editor = React.createClass({
   onNewData: function (data) {
     // get code as string save it as JS object
     this.props.newData(JSON.parse(data));
-  },
-
-  resetData: function() {
-    this.state.editor.setValue(JSON.stringify(sampleJson, null, '\t'), -1);
   },
 
   render: function () {

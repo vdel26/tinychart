@@ -9,7 +9,7 @@ function DataStore (key) {
   this.key = key;
   // initialize with sample data
   this.initialize();
-  this.onChanges = [];
+  this._events = {};
 }
 
 DataStore.prototype.initialize = function () {
@@ -23,27 +23,46 @@ DataStore.prototype.initialize = function () {
   assignColors(this.data, Utils.colors);
 }
 
-DataStore.prototype.subscribe = function (cb) {
-  this.onChanges.push(cb);
+DataStore.prototype.subscribe = function (eventType, cb) {
+  var events = this._events[eventType] || (this._events[eventType] = []);
+  events.push(cb);
 };
 
-DataStore.prototype.inform = function () {
-  this.onChanges.forEach(function (cb) {
+DataStore.prototype.inform = function (eventType) {
+  var events;
+  switch (eventType) {
+    case 'reset':
+      events = _.reduce(this._events, function (res, val) {
+        return res.concat(val)
+      });
+      break;
+
+    case 'change':
+    default:
+      events = this._events[eventType];
+      break;
+  }
+
+  events.forEach(function (cb) {
     cb();
   });
 };
+
+DataStore.prototype.getData = function () {
+  return this.data;
+},
 
 DataStore.prototype.update = function (newData) {
   this.data = newData;
   assignColors(this.data, Utils.colors);
   localStore(this.key, this.data);
-  this.inform();
+  this.inform('change');
 };
 
 DataStore.prototype.resetData = function () {
   window.localStorage.removeItem(this.key);
   this.initialize();
-  this.inform();
+  this.inform('reset');
 };
 
 module.exports = DataStore;

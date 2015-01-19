@@ -10,26 +10,39 @@ var CHART_TYPES = ['line', 'bar'];
 var MainContainer = React.createClass({
 
   propTypes: {
-    jsonData: React.PropTypes.object.isRequired,
-    currentChartType: React.PropTypes.string.isRequired
+    store: React.PropTypes.object.isRequired,
+    currentChartType: React.PropTypes.string.isRequired,
+    openSettings: React.PropTypes.func.isRequired
+  },
+
+  getInitialState: function () {
+    return { data: this.props.store.getData() };
   },
 
   openSettings: function () {
     this.props.openSettings();
   },
 
+  getStateFromStore: function () {
+    this.setState({ data: this.props.store.getData()});
+  },
+
   shouldComponentUpdate: function (nextProps, nextState) {
-    if (nextProps.jsonData !== this.props.jsonData) return true;
-    else if (nextProps.currentChartType !== this.props.currentChartType) return true;
-    else return false;
+    if (nextState.data !== this.state.data) return true;
+    if (nextProps.currentChartType !== this.props.currentChartType) return true;
+    return false;
+  },
+
+  componentDidMount: function () {
+    this.props.store.subscribe('change', this.getStateFromStore);
   },
 
   render: function () {
     var currentChart;
     if (this.props.currentChartType === 'line')
-      currentChart = <LineChart jsonData={this.props.jsonData} />;
+      currentChart = <LineChart jsonData={this.state.data} />;
     else if (this.props.currentChartType === 'bar')
-      currentChart = <BarChart jsonData={this.props.jsonData} />;
+      currentChart = <BarChart jsonData={this.state.data} />;
 
     var cx = React.addons.classSet;
     var FlashMessageClasses = cx({

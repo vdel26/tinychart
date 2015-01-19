@@ -23,7 +23,6 @@ var App = React.createClass({
 
   resetData: function () {
     this.props.store.resetData();
-    this.refs.EditorContainer.resetEditorData();
   },
 
   openSettings: function () {
@@ -49,8 +48,8 @@ var App = React.createClass({
       <div className="OuterContainer">
         <span dangerouslySetInnerHTML={{__html: icons}}/>
         <div className={AppClasses} onClick={this.closeSettings} ref="app">
-          <EditorContainer newData={this.newData} ref="EditorContainer" />
-          <MainContainer jsonData={this.props.store.data} openSettings={this.openSettings} currentChartType={this.state.currentChartType} />
+          <EditorContainer store={this.props.store} initialData={this.props.store.getData()} newData={this.newData} />
+          <MainContainer store={this.props.store} openSettings={this.openSettings} currentChartType={this.state.currentChartType} />
         </div>
         <SettingsContainer isOpen={this.state.settingsIsOpen}
                            types={CHART_TYPES}
@@ -64,9 +63,4 @@ var App = React.createClass({
 
 var store = new DataStore('chartpad');
 
-function render () {
-  React.render(<App store={store} />, document.body);
-}
-
-store.subscribe(render);
-render();
+React.render(<App store={store} />, document.body);
