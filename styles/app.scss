@@ -75,9 +75,34 @@ h1, h2, h3, h4, h5 {
 }
 .MainContainer-header {
   position: relative;
-  padding: 1em 1em;
+  padding: 1em 1em 1em 2em;
   overflow: hidden;
 }
+.MainContainer-footer {
+  position: absolute;
+  bottom: 1em;
+  margin-left: 2em;
+  color: $light-grey2;
+  cursor: pointer;
+}
+.MainContainer-brand {
+  font-size: 1em;
+  font-weight: 800;
+  margin-right: 1em;
+}
+.MainContainer-contact {
+  color: $light-grey2;
+  text-decoration: none;
+  font-size: 0.9em;
+  font-weight: 100;
+  opacity: 0.7;
+  @include transition(200ms opacity ease);
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
 .SettingsButton {
   float: right;
 

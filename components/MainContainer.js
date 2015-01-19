@@ -60,6 +60,8 @@ var MainContainer = React.createClass({
         </header>
         {currentChart}
         <footer className="MainContainer-footer">
+          <span className="MainContainer-brand">Chartpad</span>
+          <a className="MainContainer-contact" href="http://twitter.com/lechienvic">@lechienvic</a>
         </footer>
       </div>
     );
