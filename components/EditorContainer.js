@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 var React = require('react');
 var Editor = require('./Editor');
+var ExcelEditor = require('./ExcelEditor');
 var sampleJson = require('../sampleData.json');
 
 var EditorContainer = React.createClass({
@@ -30,7 +31,8 @@ var EditorContainer = React.createClass({
   render: function () {
     return (
       <div className="EditorContainer">
-        <Editor newData={this.props.newData} initialData={this.state.initialData} />
+        {/*<Editor newData={this.props.newData} initialData={this.state.initialData} />*/}
+        <ExcelEditor newData={this.props.newData} initialData={this.state.initialData} />
       </div>
     );
   }
