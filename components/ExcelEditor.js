@@ -10,6 +10,12 @@ var ExcelEditor = React.createClass({
     initialData: React.PropTypes.object.isRequired
   },
 
+  getInitialState: function () {
+    return {
+      nrows: this.props.initialData.datasets[0].data.length
+    }
+  },
+
   componentDidMount: function () {
     // console.log(this.props.initialData);
     // console.log(this.refs.tbody);
@@ -60,25 +66,36 @@ var ExcelEditor = React.createClass({
     this.props.newData(this.getTableData());
   },
 
+  addNewRow: function () {
+    this.setState({ nrows: ++this.state.nrows });
+  },
+
+  deleteRow: function () {
+    // TODO: only delete if there is no data
+    this.setState({ nrows: --this.state.nrows });
+  },
+
   render: function () {
     var divStyle = {
       width: '100%',
       height: '100%',
     };
-    var tableStyle= {
-      color: 'white'
-    };
+
+    // table header 
+    var header = [(<th></th>)];
+    this.props.initialData.datasets.forEach(function (dataset, idx) {
+      header.push(<th scope='col'>DATASET {idx+1}</th>);
+    });
 
     // generate table rows from initial data
-    var nrows = this.props.initialData.datasets[0].data.length;
     var rows = [];
-    for (var i=0; i<nrows; i++) {
+    for (var i=0; i<this.state.nrows; i++) {
       var rowHeader = [ 
-        (<th scope='row' contentEditable="true" onKeyUp={this.onNewData}> {this.props.initialData.labels[i]} </th>) 
+        (<th className='ExcelEditor-header' scope='row' contentEditable="true" onKeyUp={this.onNewData}>{this.props.initialData.labels[i]}</th>) 
         ];
       var row = this.props.initialData.datasets.map(function (dataset) {
         return (
-          <td contentEditable='true' onKeyUp={this.onNewData}>
+          <td className='ExcelEditor-cell' contentEditable='true' onKeyUp={this.onNewData}>
             {dataset.data[i]}
           </td>
         );
@@ -88,11 +105,16 @@ var ExcelEditor = React.createClass({
 
     return (
       <div className='ExcelEditor' style={divStyle}>
-        <table style={tableStyle} ref="table">
+        <table className='ExcelEditor-table' ref="table">
+          <thead>
+            { header }
+          </thead>
           <tbody ref="tbody">
             { rows }
           </tbody>
         </table>
+        <button ref="newrow" onClick={this.addNewRow}>add row</button>
+        <button ref="deleterow" onClick={this.deleteRow}>delete row</button>
       </div>
     );
   }

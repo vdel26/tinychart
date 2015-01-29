@@ -4,7 +4,7 @@
 $font: 'Avenir';
 $radius: 4px;
 
-/* colors */
+/* colors - light side */
 $light-bg-grey: #E0E6EC;
 $dark-bg-grey: #262a2e;
 $purple: #8091C6;
@@ -16,7 +16,11 @@ $icon-dark-grey: #75808F;
 $icon-hover: #545E6B;
 $icon-active: #7AB2EA;
 $positive-green: #57C6B9;
-
+/* colors - dark side*/
+$black: #1A1D21;
+$table-text: #96A6AD;
+$table-text-hover: #E2E7EB;
+$table-text-active: #6BB6C4;
 
 /* animations */
 @include keyframes(rotate-wheel) { to { @include transform(rotate(-360deg)); }  }
@@ -271,5 +275,57 @@ h1, h2, h3, h4, h5 {
 
   &.is-visible {
     @include animation(saved-inout 2.5s cubic-bezier(0.86, 0, 0.07, 1) 0s forwards);
+  }
+}
+
+.ExcelEditor {
+  display: flex;
+  align-items: center;
+}
+.ExcelEditor-table {
+  margin: -200px auto 0 auto;
+  border-spacing: 0.5em;
+  color: $table-text;
+
+  thead th {
+    font-weight: 300;
+    font-size: 0.7em;
+  }
+}
+.ExcelEditor-header {
+  background: $black;
+  min-width: 3.5em;
+  border: 2px solid transparent;
+  border-radius: $radius;
+  outline: none;
+  padding: 0.2em 0.7em;
+  font-weight: 300;
+  @include transition(200ms all ease);
+  &:hover {
+    color: $table-text-hover;
+    border: 2px solid rgba(68, 79, 88, 50);
+  }
+  &:focus {
+    color: $table-text-active;
+    border: 2px solid $green;
+  }
+}
+.ExcelEditor-cell {
+  min-width: 3em;
+  text-align: center;
+  background: $black;
+  border: 2px solid transparent;
+  border-radius: $radius;
+  outline: none;
+  padding: 0.2em 0.7em;
+  font-weight: 300;
+  @include transition(200ms all ease);
+  &:hover {
+    color: $table-text-hover;
+    border: 2px solid rgba(68, 79, 88, 50);
+  }
+  &:focus {
+    color: $table-text-active;
+    border: 2px solid $green;
   }
 }
