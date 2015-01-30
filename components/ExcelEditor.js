@@ -12,25 +12,15 @@ var ExcelEditor = React.createClass({
 
   getInitialState: function () {
     return {
-      nrows: this.props.initialData.datasets[0].data.length
+      nrows: this.props.initialData.datasets[0].data.length,
+      data: this.props.initialData
     }
   },
 
-  componentDidMount: function () {
-    // console.log(this.props.initialData);
-    // console.log(this.refs.tbody);
-    // this.table = document.querySelector('table');
-    // this.dataCells = this.table.querySelectorAll('tr > td');
-    // this.rows = this.table.querySelectorAll('tr');
-    // this.rows = Array.prototype.slice.call(this.rows, 1);
-
-    // this.ncols = this.rows[0].children.length - 1;
-
-    // this.initEvents();
-  },
-
   componentWillReceiveProps: function (nextProps) {
-    this.forceUpdate();
+    this.setState({
+      data: nextProps.initialData
+    });
   },
 
   getLabels: function () {
@@ -61,18 +51,25 @@ var ExcelEditor = React.createClass({
     return data;
   },
 
-  onNewData: function (data) {
+  onNewData: function () {
     // TODO: debounce updates
     this.props.newData(this.getTableData());
   },
 
   addNewRow: function () {
-    this.setState({ nrows: ++this.state.nrows });
+    this.setState({ 
+      nrows: ++this.state.nrows,
+      data: this.getTableData()
+    });
   },
 
   deleteRow: function () {
-    // TODO: only delete if there is no data
-    this.setState({ nrows: --this.state.nrows });
+    if (this.state.nrows === 2) return;
+    // trigger 'onNewData' to make sure the row's data is deleted in the store
+    this.setState({ 
+      nrows: --this.state.nrows,
+      data: this.getTableData()
+    }, this.onNewData);
   },
 
   render: function () {
@@ -83,7 +80,7 @@ var ExcelEditor = React.createClass({
 
     // table header 
     var header = [(<th></th>)];
-    this.props.initialData.datasets.forEach(function (dataset, idx) {
+    this.state.data.datasets.forEach(function (dataset, idx) {
       header.push(<th scope='col'>DATASET {idx+1}</th>);
     });
 
@@ -91,9 +88,9 @@ var ExcelEditor = React.createClass({
     var rows = [];
     for (var i=0; i<this.state.nrows; i++) {
       var rowHeader = [ 
-        (<th className='ExcelEditor-header' scope='row' contentEditable="true" onKeyUp={this.onNewData}>{this.props.initialData.labels[i]}</th>) 
+        (<th className='ExcelEditor-header' scope='row' contentEditable="true" onKeyUp={this.onNewData}>{this.state.data.labels[i]}</th>) 
         ];
-      var row = this.props.initialData.datasets.map(function (dataset) {
+      var row = this.state.data.datasets.map(function (dataset, idx) {
         return (
           <td className='ExcelEditor-cell' contentEditable='true' onKeyUp={this.onNewData}>
             {dataset.data[i]}
@@ -106,15 +103,17 @@ var ExcelEditor = React.createClass({
     return (
       <div className='ExcelEditor' style={divStyle}>
         <table className='ExcelEditor-table' ref="table">
-          <thead>
+          <thead ref="thead">
             { header }
           </thead>
           <tbody ref="tbody">
             { rows }
           </tbody>
         </table>
-        <button ref="newrow" onClick={this.addNewRow}>add row</button>
-        <button ref="deleterow" onClick={this.deleteRow}>delete row</button>
+        <nav>
+          <button ref="newrow" onClick={this.addNewRow}>add row</button>
+          <button ref="deleterow" onClick={this.deleteRow}>delete row</button>
+        </nav>
       </div>
     );
   }
