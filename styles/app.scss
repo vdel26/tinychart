@@ -170,6 +170,61 @@ h1, h2, h3, h4, h5 {
   background-color: $dark-bg-grey;
   color: #d9dfe2;
 }
+
+.EditorNav {
+  @include display(flex);
+  @include flex-direction(row);
+  @include justify-content(center);
+}
+
+.EditorNav-list {
+  list-style: none;
+  cursor: pointer;
+  padding: 0;
+  @include user-select(none);
+}
+
+.EditorNav-elem {
+  display: inline-block;
+  padding: 4px 8px;
+  font-size: 0.8em;
+  color: $table-text;
+  background: rgba(59,66,74,0.75);
+  @include background-image(linear-gradient(-180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.00) 100%));
+  border: 1px solid rgba(26,29,33,0.75);
+  box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,0.02);
+
+  &:first-child {
+    border-radius: $radius 0 0 $radius;
+  }
+  &:last-child {
+    border-radius: 0 $radius $radius 0;
+  }
+
+  &:hover {
+    color: #E2E7EB;
+    background: #3B424A;
+    @include background-image(linear-gradient(-180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.00) 100%));
+    border: 1px solid rgba(26,29,33,0.75);
+    box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,0.02);
+  }
+  &:active {
+    color: $green;
+    background: rgba(58,66,73,0.75);
+    @include background-image(linear-gradient(-180deg, rgba(0,0,0,0.10) 0%, rgba(255,255,255,0.00) 100%));
+    border: 1px solid rgba(26,29,33,0.75);
+    box-shadow: inset 0px -1px 0px 0px rgba(255,255,255,0.02);
+  }
+}
+
+.EditorNav-elem.is-selected {
+  color: #191C1F;
+  @include background-image(linear-gradient(-155deg, #6BB6C4 0%, #6B9AD3 100%));
+  // background-image: linear-gradient(-180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.00) 100%);
+  border: 1px solid rgba(26,29,33,0.75);
+  box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,0.12);
+}
+
 /* custom theme for ace editor */
 #editor .ace_editor {
   background-color: $dark-bg-grey;
@@ -279,8 +334,8 @@ h1, h2, h3, h4, h5 {
 }
 
 .ExcelEditor {
-  display: flex;
-  align-items: center;
+  @include display(flex);
+  @include align-items(center);
 }
 .ExcelEditor-table {
   margin: -200px auto 0 auto;

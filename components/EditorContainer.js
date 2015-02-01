@@ -12,7 +12,10 @@ var EditorContainer = React.createClass({
   },
 
   getInitialState: function () {
-    return { initialData: this.props.store.getData() }
+    return { 
+      initialData: this.props.store.getData(),
+      currentEditorMode: 'json'
+    }
   },
 
   resetEditorData: function () {
@@ -25,14 +28,35 @@ var EditorContainer = React.createClass({
 
   shouldComponentUpdate: function (nextProps, nextState) {
     if (nextState.initialData !== this.state.initialData) return true;
+    if (nextState.currentEditorMode !== this.state.currentEditorMode) return true;
     return false;
   },
 
+  switchEditorMode: function (nextMode) {
+    console.log('dude', nextMode);
+    this.setState({ currentEditorMode: nextMode });
+  },
+
   render: function () {
+    var editor;
+    if (this.state.currentEditorMode === 'table') {
+      editor = <ExcelEditor newData={this.props.newData} initialData={this.state.initialData} />;
+    }
+    else if (this.state.currentEditorMode === 'json') {
+      editor = <Editor newData={this.props.newData} initialData={this.state.initialData} />;
+    }
+
     return (
       <div className="EditorContainer">
-        {/*<Editor newData={this.props.newData} initialData={this.state.initialData} />*/}
-        <ExcelEditor newData={this.props.newData} initialData={this.state.initialData} />
+        <nav className="EditorNav">
+          <ul className="EditorNav-list">
+            <li className={"EditorNav-elem " + (this.state.currentEditorMode === 'table' ? 'is-selected' : '')} 
+                onClick={this.switchEditorMode.bind(null, 'table')}>TABLE</li>
+            <li className={"EditorNav-elem " + (this.state.currentEditorMode === 'json' ? 'is-selected' : '')} 
+                onClick={this.switchEditorMode.bind(null, 'json')}>JSON</li>
+          </ul>
+        </nav>
+        { editor }
       </div>
     );
   }
