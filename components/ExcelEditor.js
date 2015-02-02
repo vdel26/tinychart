@@ -17,6 +17,10 @@ var ExcelEditor = React.createClass({
     }
   },
 
+  componentDidMount: function () {
+    console.log('DIDMOUNT');
+  },
+
   componentWillReceiveProps: function (nextProps) {
     this.setState({
       data: nextProps.initialData

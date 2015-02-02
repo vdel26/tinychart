@@ -54,7 +54,7 @@ module.exports = {
 
   // assign colorschemes to datasets
   assignColors: function (input, colors) {
-    var output = _.clone(input);
+    var output = _.cloneDeep(input);
     for (var i=0; i < output.datasets.length; i++) {
       for (var prop in colors[i]) {
         output.datasets[i][prop] = colors[i][prop];
