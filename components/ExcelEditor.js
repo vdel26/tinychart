@@ -120,17 +120,19 @@ var ExcelEditor = React.createClass({
 
     return (
       <div className='ExcelEditor' style={divStyle}>
-        <table className='ExcelEditor-table' ref="table">
-          <thead ref="thead">
-            <tr>
-              { header }
-            </tr>
-          </thead>
-          <tbody ref="tbody">
-            { rows }
-          </tbody>
-        </table>
-        <nav>
+        <div className='ExcelEditor-wrapper'>
+          <table className='ExcelEditor-table' ref="table">
+            <thead ref="thead">
+              <tr>
+                { header }
+              </tr>
+            </thead>
+            <tbody ref="tbody">
+              { rows }
+            </tbody>
+          </table>
+        </div>
+        <nav className='ExcelEditor-controls'>
           <button ref="newrow" onClick={this.addNewRow}>add row</button>
           <button ref="deleterow" onClick={this.deleteRow}>delete row</button>
           <button ref="newcol" onClick={this.addNewCol}>add column</button>

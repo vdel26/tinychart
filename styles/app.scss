@@ -226,7 +226,10 @@ h1, h2, h3, h4, h5 {
 }
 
 /* custom theme for ace editor */
-#editor .ace_editor {
+#editor.ace_editor {
+  background-color: $dark-bg-grey;
+}
+#editor .ace_gutter {
   background-color: $dark-bg-grey;
 }
 #editor .ace_variable {
@@ -335,7 +338,12 @@ h1, h2, h3, h4, h5 {
 
 .ExcelEditor {
   @include display(flex);
+  @include flex-direction(column);
   @include align-items(center);
+  @include justify-content(center);
+}
+.ExcelEditor-wrapper {
+
 }
 .ExcelEditor-table {
   margin: -200px auto 0 auto;

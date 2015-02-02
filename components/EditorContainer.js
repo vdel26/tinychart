@@ -33,7 +33,6 @@ var EditorContainer = React.createClass({
   },
 
   switchEditorMode: function (nextMode) {
-    console.log('dude', nextMode);
     this.setState({ currentEditorMode: nextMode });
   },
 
