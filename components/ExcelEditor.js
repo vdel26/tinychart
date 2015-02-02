@@ -13,12 +13,9 @@ var ExcelEditor = React.createClass({
   getInitialState: function () {
     return {
       nrows: this.props.initialData.datasets[0].data.length,
+      ncols: this.props.initialData.datasets.length,
       data: this.props.initialData
     }
-  },
-
-  componentDidMount: function () {
-    console.log('DIDMOUNT');
   },
 
   componentWillReceiveProps: function (nextProps) {
@@ -76,6 +73,21 @@ var ExcelEditor = React.createClass({
     }, this.onNewData);
   },
 
+  addNewCol: function () {
+    this.setState({
+      ncols: ++this.state.ncols,
+      data: this.getTableData()
+    });
+  },
+
+  deleteCol: function () {
+    if (this.state.ncols === 1) return;
+    this.setState({
+      ncols: --this.state.ncols,
+      data: this.getTableData()
+    }, this.onNewData);
+  },
+
   render: function () {
     var divStyle = {
       width: '100%',
@@ -84,9 +96,9 @@ var ExcelEditor = React.createClass({
 
     // table header 
     var header = [(<th></th>)];
-    this.state.data.datasets.forEach(function (dataset, idx) {
-      header.push(<th scope='col'>DATASET {idx+1}</th>);
-    });
+    for (var j=0; j<this.state.ncols; j++) {
+      header.push(<th scope='col'>DATASET {j+1}</th>);
+    }
 
     // generate table rows from initial data
     var rows = [];
@@ -95,12 +107,14 @@ var ExcelEditor = React.createClass({
         (<th className='ExcelEditor-header' scope='row' contentEditable="true" onKeyUp={this.onNewData}>{this.state.data.labels[i]}</th>) 
         ];
       var row = this.state.data.datasets.map(function (dataset, idx) {
+        if (idx >= this.state.ncols) return;
         return (
           <td className='ExcelEditor-cell' contentEditable='true' onKeyUp={this.onNewData}>
             {dataset.data[i]}
           </td>
         );
       }.bind(this));
+      if (this.state.ncols > row.length) row.push(<td className='ExcelEditor-cell' contentEditable='true' onKeyUp={this.onNewData}></td>);
       rows.push(<tr>{rowHeader.concat(row)}</tr>);
     }
 
@@ -108,7 +122,9 @@ var ExcelEditor = React.createClass({
       <div className='ExcelEditor' style={divStyle}>
         <table className='ExcelEditor-table' ref="table">
           <thead ref="thead">
-            { header }
+            <tr>
+              { header }
+            </tr>
           </thead>
           <tbody ref="tbody">
             { rows }
@@ -117,6 +133,8 @@ var ExcelEditor = React.createClass({
         <nav>
           <button ref="newrow" onClick={this.addNewRow}>add row</button>
           <button ref="deleterow" onClick={this.deleteRow}>delete row</button>
+          <button ref="newcol" onClick={this.addNewCol}>add column</button>
+          <button ref="deletecol" onClick={this.deleteCol}>delete column</button>
         </nav>
       </div>
     );
