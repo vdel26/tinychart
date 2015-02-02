@@ -114,7 +114,9 @@ var ExcelEditor = React.createClass({
           </td>
         );
       }.bind(this));
-      if (this.state.ncols > row.length) row.push(<td className='ExcelEditor-cell' contentEditable='true' onKeyUp={this.onNewData}></td>);
+      if (this.state.ncols > row.length) {
+        row.push(<td className='ExcelEditor-cell' contentEditable='true' onKeyUp={this.onNewData}></td>);
+      }
       rows.push(<tr>{rowHeader.concat(row)}</tr>);
     }
 
