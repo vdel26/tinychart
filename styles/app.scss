@@ -29,6 +29,12 @@ $table-text-active: #6BB6C4;
   50% { @include transform(translateY(0)); }
   to { @include transform(translateY(-3em)); }
 }
+@include keyframes(editor-right-in) {
+  to { opacity: 1; }
+}
+@include keyframes(editor-left-in) {
+  to { opacity: 1; }
+}
 
 html, body {
     width: 100%;
@@ -52,6 +58,7 @@ h1, h2, h3, h4, h5 {
 .App {
   @include display(flex);
   height: 100%;
+  overflow: hidden;
 }
 .App:before {
   content: '';
@@ -165,7 +172,6 @@ h1, h2, h3, h4, h5 {
 .EditorContainer {
   width: 30%;
   min-width: 500px;
-  overflow: scroll;
 
   background-color: $dark-bg-grey;
   color: #d9dfe2;
@@ -223,6 +229,12 @@ h1, h2, h3, h4, h5 {
   // background-image: linear-gradient(-180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.00) 100%);
   border: 1px solid rgba(26,29,33,0.75);
   box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,0.12);
+}
+
+.JsonEditor {
+  overflow: scroll;
+  opacity: 0;
+  @include animation(editor-right-in 600ms cubic-bezier(0.215, 0.61, 0.355, 1) 0 forwards);
 }
 
 /* custom theme for ace editor */
@@ -337,16 +349,23 @@ h1, h2, h3, h4, h5 {
 }
 
 .ExcelEditor {
-  @include display(flex);
-  @include flex-direction(column);
-  @include align-items(center);
-  @include justify-content(center);
+  display: block;
+  overflow: scroll;
+//  @include transform(translateX(-10em));
+  opacity: 0;
+  @include animation(editor-right-in 600ms cubic-bezier(0.215, 0.61, 0.355, 1) 0 forwards);
+}
+.ExcelEditor-controls {
+  text-align: center;
+  margin-top: 1em;
+  margin-bottom: 2em;
 }
 .ExcelEditor-wrapper {
-
+  display: block;
+  text-align: center;
 }
 .ExcelEditor-table {
-  margin: -200px auto 0 auto;
+  margin: 0 auto;
   border-spacing: 0.5em;
   color: $table-text;
 
