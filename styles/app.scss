@@ -118,6 +118,8 @@ h1, h2, h3, h4, h5 {
   float: right;
 
   & > svg {
+    width: 25px;
+    height: 25px;
     stroke: $icon-dark-grey;
     fill: transparent;
     @include transition(200ms stroke ease);
@@ -268,8 +270,8 @@ h1, h2, h3, h4, h5 {
   display: block;
   width: 250px;
   height: 270px;
-  top: 2.5em;
-  right: 1.5em;
+  top: 2.9em;
+  right: 1.7em;
   border-radius: $radius;
   background: $light-bg-grey;
   opacity: 0;
