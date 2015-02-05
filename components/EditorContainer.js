@@ -14,7 +14,7 @@ var EditorContainer = React.createClass({
   getInitialState: function () {
     return { 
       initialData: this.props.store.getData(),
-      currentEditorMode: 'json'
+      currentEditorMode: 'table'
     }
   },
 

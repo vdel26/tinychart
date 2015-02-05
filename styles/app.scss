@@ -357,8 +357,39 @@ h1, h2, h3, h4, h5 {
 }
 .ExcelEditor-controls {
   text-align: center;
-  margin-top: 1em;
+  margin-top: 3em;
   margin-bottom: 2em;
+  @include user-select(none);
+  cursor: default;
+
+  &:hover .ExcelEditor-control {
+    color: $table-text-hover;
+  }
+}
+.ExcelEditor-control {
+  display: inline-block;
+  color: $table-text;
+  opacity: 0.6;
+  margin: 0 1em;
+  @include transition(300ms all ease);
+
+  a {
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  a:first-child {
+    margin-right: 0.4em;
+  }
+  a:last-child {
+    margin-left: 0.4em;
+  }
+  a:active {
+    color: $table-text-active;
+  }
+  span {
+    font-size: 0.8em;
+  }
 }
 .ExcelEditor-wrapper {
   display: block;
