@@ -1,19 +1,17 @@
 {
   "name": "Chartpad",
   "version": "0.0.1",
-  "description": "",
+  "description": "A simple tool to create quick exportable charts",
   "main": "index.js",
   "scripts": {
     "start": "npm run watch-js & npm run watch-css",
     "watch-js": "webpack --progress --colors --watch",
     "watch-css": "sass --watch styles/",
-    "release": "webpack -p",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "release": "webpack -p"
   },
-  "author": "",
-  "license": "BSD-2-Clause",
+  "author": "Victor Delgado",
+  "license": "MIT",
   "dependencies": {
-    "JSONSelect": "^0.4.0",
     "brace": "^0.4.0",
     "chart.js": "^1.0.1-beta.2",
     "envify": "^1.2.0",
