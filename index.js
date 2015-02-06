@@ -6,7 +6,7 @@ var SettingsContainer = require('./components/SettingsContainer');
 var DataStore = require('./DataStore');
 var CHART_TYPES = ['line', 'bar'];
 
-var icons = require('!!raw!./fonts/svg-icons-all.svg');
+var icons = require('!!raw!./icons/svg-icons-all.svg');
 
 var App = React.createClass({
 

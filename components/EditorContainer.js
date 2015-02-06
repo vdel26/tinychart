@@ -33,7 +33,10 @@ var EditorContainer = React.createClass({
   },
 
   switchEditorMode: function (nextMode) {
-    this.setState({ currentEditorMode: nextMode });
+    this.setState({ 
+      currentEditorMode: nextMode,
+      initialData: this.props.store.getData()
+    });
   },
 
   render: function () {

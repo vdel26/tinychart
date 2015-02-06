@@ -130,10 +130,6 @@ var ExcelEditor = React.createClass({
           <div className='ExcelEditor-control'>
             <a onClick={this.addNewCol}>+</a><span>columns</span><a onClick={this.deleteCol}>&ndash;</a>
           </div>
-          {/*<button ref="newrow" onClick={this.addNewRow}>add row</button>
-          <button ref="deleterow" onClick={this.deleteRow}>delete row</button>
-          <button ref="newcol" onClick={this.addNewCol}>add column</button>
-          <button ref="deletecol" onClick={this.deleteCol}>delete column</button>*/}
         </nav>
         <div className='ExcelEditor-wrapper'>
           <table className='ExcelEditor-table' ref="table">
