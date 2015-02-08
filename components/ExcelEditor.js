@@ -21,6 +21,8 @@ var ExcelEditor = React.createClass({
 
   componentWillReceiveProps: function (nextProps) {
     this.setState({
+      nrows: nextProps.initialData.datasets[0].data.length,
+      ncols: nextProps.initialData.datasets.length,
       data: nextProps.initialData
     });
   },
@@ -111,7 +113,7 @@ var ExcelEditor = React.createClass({
         if (idx >= this.state.ncols) return;
         return (
           <td className='ExcelEditor-cell' contentEditable='true' onKeyUp={this.onNewData}>
-            {dataset.data[i]}
+            {dataset.data[i] ? dataset.data[i] : <br />}
           </td>
         );
       }.bind(this));
