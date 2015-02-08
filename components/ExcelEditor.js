@@ -1,4 +1,3 @@
-
 /** @jsx React.DOM */
 var React = require('react');
 
@@ -55,9 +54,17 @@ var ExcelEditor = React.createClass({
     return data;
   },
 
-  onNewData: function () {
-    // TODO: debounce updates
-    this.props.newData(this.getTableData());
+  _keyShouldUpdate: function (keyCode) {
+    if (keyCode >= 48 && keyCode <= 90) return true; // [0-9 a-z]
+    if (keyCode >= 96 && keyCode <= 105) return true; // numpad 0-9
+    if (keyCode === 8 || keyCode === 46) return true; // backspace and delete
+    return false;
+  },
+
+  onNewData: function (evt) {
+    if (this._keyShouldUpdate(evt.keyCode)) {
+      this.props.newData(this.getTableData());
+    }
   },
 
   addNewRow: function () {
@@ -69,7 +76,6 @@ var ExcelEditor = React.createClass({
 
   deleteRow: function () {
     if (this.state.nrows === 2) return;
-    // trigger 'onNewData' to make sure the row's data is deleted in the store
     this.setState({ 
       nrows: --this.state.nrows,
       data: this.getTableData()
