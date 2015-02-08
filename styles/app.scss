@@ -116,6 +116,7 @@ h1, h2, h3, h4, h5 {
 
 .SettingsButton {
   float: right;
+  cursor: pointer;
 
   & > svg {
     width: 25px;
@@ -123,6 +124,7 @@ h1, h2, h3, h4, h5 {
     stroke: $icon-dark-grey;
     fill: transparent;
     @include transition(200ms stroke ease);
+    pointer-events: none;
   }
   &:hover > svg {
     stroke: $icon-hover;
@@ -354,7 +356,7 @@ h1, h2, h3, h4, h5 {
   display: block;
   overflow: scroll;
 //  @include transform(translateX(-10em));
-  opacity: 0;
+  opacity: 1;
   @include animation(editor-right-in 600ms cubic-bezier(0.215, 0.61, 0.355, 1) 0 forwards);
 }
 .ExcelEditor-controls {

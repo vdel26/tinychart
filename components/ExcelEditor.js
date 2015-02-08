@@ -28,7 +28,7 @@ var ExcelEditor = React.createClass({
   getLabels: function () {
     var headers = document.querySelectorAll('[scope="row"]');
     return Array.prototype.map.call(headers, function (th) {
-      return th.innerText;
+      return th.textContent;
     });
   },
 
