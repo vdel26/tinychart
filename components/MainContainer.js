@@ -53,7 +53,7 @@ var MainContainer = React.createClass({
     return (
       <div className="MainContainer">
         <header className="MainContainer-header">
-          <span className={FlashMessageClasses}>Saved!</span>
+          <span className={FlashMessageClasses}>Welcome to Tinychart!</span>
           <div className="SettingsButton"
                onClick={this.openSettings}
                dangerouslySetInnerHTML={{__html: Utils.svgHelper('#settings-icon')}}/>

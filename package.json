@@ -7,14 +7,14 @@
     "start": "npm run watch-js & npm run watch-css",
     "watch-js": "webpack --progress --colors --watch",
     "watch-css": "sass --watch styles/",
-    "release": "webpack -p"
+    "build-css": "sass --style compressed --sourcemap=none styles/app.scss dist/app.css",
+    "release": "NODE_ENV=production webpack -p && npm run build-css"
   },
   "author": "Victor Delgado",
   "license": "MIT",
   "dependencies": {
     "brace": "^0.4.0",
     "chart.js": "^1.0.1-beta.2",
-    "envify": "^1.2.0",
     "lodash": "^2.4.1",
     "react": "^0.12.1"
   },
