@@ -98,10 +98,6 @@ var ExcelEditor = React.createClass({
   },
 
   render: function () {
-    var divStyle = {
-      width: '100%',
-      height: '100%',
-    };
 
     // table header 
     var header = [(<th></th>)];
@@ -130,7 +126,7 @@ var ExcelEditor = React.createClass({
     }
 
     return (
-      <div className='ExcelEditor' style={divStyle}>
+      <div className='ExcelEditor'>
         <nav className='ExcelEditor-controls'>
           <div className='ExcelEditor-control'>
             <a onClick={this.addNewRow}>+</a><span>rows</span><a onClick={this.deleteRow}>&ndash;</a>

@@ -46,12 +46,8 @@ var Editor = React.createClass({
   },
 
   render: function () {
-    var divStyle = {
-      width: '100%',
-      height: '100%'
-    };
     return (
-      <div id='editor' className='JsonEditor' style={divStyle}></div>
+      <div id='editor' className='JsonEditor'></div>
     );
   }
 
