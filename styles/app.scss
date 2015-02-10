@@ -12,6 +12,7 @@ $green: #6BB6C4;
 $white: #FFF;
 $light-grey4: #E2E7EB;
 $light-grey2: #3B424A;
+$darkest-grey: #545E6B;
 $icon-dark-grey: #75808F;
 $icon-hover: #545E6B;
 $icon-active: #7AB2EA;
@@ -23,16 +24,13 @@ $table-text-hover: #E2E7EB;
 $table-text-active: #6BB6C4;
 
 /* animations */
-@include keyframes(rotate-wheel) { to { @include transform(rotate(-360deg)); }  }
+@include keyframes(rotate-wheel) { 100% { @include transform(rotate(360deg)); }  }
 @include keyframes(saved-inout) {
   from { @include transform(translateY(-3em)); }
   50% { @include transform(translateY(0)); }
   to { @include transform(translateY(-3em)); }
 }
-@include keyframes(editor-right-in) {
-  to { opacity: 1; @include transform(translateX(0)); }
-}
-@include keyframes(editor-left-in) {
+@include keyframes(editor-in) {
   to { opacity: 1; @include transform(translateX(0)); }
 }
 
@@ -125,10 +123,14 @@ h1, h2, h3, h4, h5 {
     fill: transparent;
     @include transition(200ms stroke ease);
     pointer-events: none;
+    
+    @include animation(rotate-wheel 3s linear infinite);
+    @include animation-play-state(paused);
+
   }
   &:hover > svg {
     stroke: $icon-hover;
-    @include animation(rotate-wheel 3s linear 0s infinite);
+    @include animation-play-state(running);
   }
 
   &:active > svg {
@@ -242,8 +244,8 @@ h1, h2, h3, h4, h5 {
   overflow: scroll;
   opacity: 0;
   z-index: 1;
-  @include transform(translateX(1em));
-  @include animation(editor-left-in 600ms cubic-bezier(0.215, 0.61, 0.355, 1) forwards);
+  @include transform(translateX(-1em));
+  @include animation(editor-in 600ms cubic-bezier(0.215, 0.61, 0.355, 1) forwards);
 }
 
 /* custom theme for ace editor */
@@ -348,12 +350,12 @@ h1, h2, h3, h4, h5 {
 }
 
 .FlashMessage {
-  color: $positive-green;
+  color: $darkest-grey;
   float: left;
   @include transform(translateY(-3em));
 
   &.is-visible {
-    @include animation(saved-inout 2.5s cubic-bezier(0.86, 0, 0.07, 1) 0s forwards);
+    @include animation(saved-inout 4s cubic-bezier(0.86, 0, 0.07, 1) 0.2s forwards);
   }
 }
 
@@ -363,9 +365,9 @@ h1, h2, h3, h4, h5 {
   display: block;
   overflow: scroll;
   z-index: 1;
-  @include transform(translateX(-1em));
+  @include transform(translateX(1em));
   opacity: 0;
-  @include animation(editor-right-in 600ms cubic-bezier(0.215, 0.61, 0.355, 1) forwards);
+  @include animation(editor-in 600ms cubic-bezier(0.215, 0.61, 0.355, 1) forwards);
 }
 .ExcelEditor-controls {
   text-align: center;
