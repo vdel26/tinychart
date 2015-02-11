@@ -61,10 +61,14 @@ var ExcelEditor = React.createClass({
     return false;
   },
 
-  onNewData: function (evt) {
+  onKeyUp: function (evt) {
     if (this._keyShouldUpdate(evt.keyCode)) {
-      this.props.newData(this.getTableData());
+      this.onNewData();
     }
+  },
+
+  onNewData: function (evt) {
+    this.props.newData(this.getTableData());
   },
 
   addNewRow: function () {
@@ -109,18 +113,18 @@ var ExcelEditor = React.createClass({
     var rows = [];
     for (var i=0; i<this.state.nrows; i++) {
       var rowHeader = [ 
-        (<th className='ExcelEditor-header' scope='row' contentEditable="true" onKeyUp={this.onNewData}>{this.state.data.labels[i]}</th>) 
+        (<th className='ExcelEditor-header' scope='row' contentEditable="true" onKeyUp={this.onKeyUp}>{this.state.data.labels[i]}</th>) 
         ];
       var row = this.state.data.datasets.map(function (dataset, idx) {
         if (idx >= this.state.ncols) return;
         return (
-          <td className='ExcelEditor-cell' contentEditable='true' onKeyUp={this.onNewData}>
+          <td className='ExcelEditor-cell' contentEditable='true' onKeyUp={this.onKeyUp}>
             {dataset.data[i] ? dataset.data[i] : <br />}
           </td>
         );
       }.bind(this));
       if (this.state.ncols > row.length) {
-        row.push(<td className='ExcelEditor-cell' contentEditable='true' onKeyUp={this.onNewData}></td>);
+        row.push(<td className='ExcelEditor-cell' contentEditable='true' onKeyUp={this.onKeyUp}></td>);
       }
       rows.push(<tr>{rowHeader.concat(row)}</tr>);
     }
