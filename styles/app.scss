@@ -1,7 +1,7 @@
 @import '../node_modules/node-bourbon/assets/stylesheets/bourbon';
 
 /* variables */
-$font: 'Avenir';
+$font: 'Avenir', 'Arial', sans-serif;
 $radius: 4px;
 
 /* colors - light side */
@@ -427,6 +427,7 @@ h1, h2, h3, h4, h5 {
   outline: none;
   padding: 0.2em 0.7em;
   font-weight: 300;
+  line-height: 1.4em;
   @include transition(200ms all ease);
   &:hover {
     color: $table-text-hover;
@@ -446,6 +447,7 @@ h1, h2, h3, h4, h5 {
   outline: none;
   padding: 0.2em 0.7em;
   font-weight: 300;
+  line-height: 1.4em;
   @include transition(200ms all ease);
   &:hover {
     color: $table-text-hover;
