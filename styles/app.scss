@@ -17,6 +17,7 @@ $icon-dark-grey: #75808F;
 $icon-hover: #545E6B;
 $icon-active: #7AB2EA;
 $positive-green: #57C6B9;
+
 /* colors - dark side*/
 $black: #1A1D21;
 $table-text: #96A6AD;
@@ -52,6 +53,9 @@ h1, h2, h3, h4, h5 {
   cursor: pointer;
   fill: #75808F;
   stroke: #75808F;
+}
+.OuterContainer {
+  height: 100%;
 }
 .App {
   @include display(flex);
@@ -176,6 +180,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .EditorContainer {
+  height: 100%;
   width: 30%;
   min-width: 500px;
 
