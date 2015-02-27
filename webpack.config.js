@@ -1,8 +1,9 @@
 var webpack = require('webpack');
 
 var plugins = [];
+var release = false;
 if (process.env.NODE_ENV === 'production') {
-  var release = true;
+  release = true;
   plugins.push(
     new webpack.DefinePlugin({
       'process.env': {
@@ -19,7 +20,7 @@ module.exports = {
   entry: './index',
   output: {
     path: release ? './dist' : '.',
-    filename: 'browser-bundle.js'
+    filename: 'browser-bundle-[hash].js'
   },
   module: {
     loaders: [
