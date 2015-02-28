@@ -16,6 +16,8 @@ var LineChart = React.createClass({
     var ctx = el.getContext('2d');
     Chart.defaults.global = ChartConfig;
     var data = Utils.assignColors(props.jsonData, Utils.colorschemes);
+    el.width = 600;
+    el.height = 480;
     this.chart = new Chart(ctx).Line(data, {});
   },
 
@@ -35,8 +37,11 @@ var LineChart = React.createClass({
   },
 
   render: function () {
+    var style = {
+      marginTop: window.devicePixelRatio > 1 ? 100 : 50
+    };
     return (
-      <canvas className='Chart LineChart' width='600px' height='480px'></canvas>
+      <canvas className='Chart LineChart' width='600px' height='480px' style={style} />
     );
   }
 

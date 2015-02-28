@@ -14,6 +14,11 @@ prepare-dist:
 	@touch dist/CNAME 
 	@echo $(DOMAIN) > dist/CNAME
 
+dev-html:
+	@cp index.html.tpl index.html
+	@sed -i "" "s/{{MAINCSS}}/styles\/app.css/g" index.html
+	@sed -i "" "s/{{MAINJS}}/browser-bundle.js/g" index.html
+
 build: prepare-dist
 	@echo "building dist version..."
 	@cp index.html.tpl $(html_file)

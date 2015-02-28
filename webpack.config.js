@@ -20,7 +20,7 @@ module.exports = {
   entry: './index',
   output: {
     path: release ? './dist' : '.',
-    filename: 'browser-bundle-[hash].js'
+    filename: release ? 'browser-bundle-[hash].js' : 'browser-bundle.js'
   },
   module: {
     loaders: [

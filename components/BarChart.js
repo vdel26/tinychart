@@ -16,6 +16,8 @@ var BarChart = React.createClass({
     var ctx = el.getContext('2d');
     Chart.defaults.global = ChartConfig;
     var data = Utils.assignColors(props.jsonData, Utils.colorschemes);
+    el.width = 600;
+    el.height = 480;
     this.chart = new Chart(ctx).Bar(data, {});
   },
 
@@ -35,8 +37,11 @@ var BarChart = React.createClass({
   },
 
   render: function () {
+    var style = {
+      marginTop: window.devicePixelRatio > 1 ? 100 : 50
+    };
     return (
-      <canvas className='Chart BarChart' width='600px' height='480px'></canvas>
+      <canvas className='Chart BarChart' width='600px' height='480px' style={style}></canvas>
     );
   }
 
