@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('lodash');
+var lz = require('lz-string');
 var Utils = require('./Utils');
 var sampleJson = require('./sampleData.json');
 
@@ -13,13 +14,34 @@ function DataStore (key) {
 }
 
 DataStore.prototype.initialize = function () {
+  if (this._initFromUrl()) return;
   if (localStore(this.key)) {
     this.data = localStore(this.key);
   }
   else {
-    this.data = _.cloneDeep(sampleJson);
+    this._setSampleData();
   }
-}
+};
+
+DataStore.prototype._setSampleData = function () {
+  this.data = _.cloneDeep(sampleJson);
+};
+
+DataStore.prototype._initFromUrl = function () {
+  // if share url present, init data from url and return true
+  // if not present, return false
+  if (!window.location.hash) return false;
+  var m = /#\/share\/(.+)/.exec(decodeURIComponent(window.location.hash));
+  if (m[1]) {
+    try {
+      var rawData = lz.decompressFromEncodedURIComponent(m[1]);
+      this.data = JSON.parse(rawData);
+    }
+    catch (e) { return false; }
+    return true;
+  }
+  else return false;
+};
 
 DataStore.prototype.subscribe = function (eventType, cb) {
   var events = this._events[eventType] || (this._events[eventType] = []);
@@ -58,7 +80,7 @@ DataStore.prototype.update = function (newData) {
 
 DataStore.prototype.resetData = function () {
   window.localStorage.removeItem(this.key);
-  this.initialize();
+  this._setSampleData();
   this.inform('reset');
 };
 

@@ -4,6 +4,7 @@ var EditorContainer = require('./components/EditorContainer');
 var MainContainer = require('./components/MainContainer');
 var SettingsContainer = require('./components/SettingsContainer');
 var DataStore = require('./DataStore');
+var Utils = require('./Utils');
 var CHART_TYPES = ['line', 'bar'];
 
 var icons = require('!!raw!./icons/svg-icons-all.svg');
@@ -23,6 +24,11 @@ var App = React.createClass({
 
   resetData: function () {
     this.props.store.resetData();
+    Utils.setUrl('');
+  },
+
+  shareUrl: function () {
+    Utils.setUrl(this.props.store.getData());
   },
 
   openSettings: function () {
@@ -54,7 +60,8 @@ var App = React.createClass({
         <SettingsContainer isOpen={this.state.settingsIsOpen}
                            types={CHART_TYPES}
                            switchChartType={this.switchChartType}
-                           resetData={this.resetData} />
+                           resetData={this.resetData}
+                           shareUrl={this.shareUrl} />
       </div>
     );
   }

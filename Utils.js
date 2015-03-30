@@ -1,4 +1,4 @@
-'use strict';
+var lz = require('lz-string');
 
 module.exports = {
 
@@ -61,6 +61,16 @@ module.exports = {
       }
     }
     return output;
+  },
+
+  // set url from encoded data
+  setUrl: function (data) {
+    if (!data) {
+      return window.history.replaceState({}, 'clear', '/');
+    }
+    var compressed = lz.compressToEncodedURIComponent(JSON.stringify(data));
+    var url = '#/share/' + compressed;
+    window.history.replaceState({}, 'share', url);
   }
 
 };

@@ -127,7 +127,7 @@ h1, h2, h3, h4, h5 {
     fill: transparent;
     @include transition(200ms stroke ease);
     pointer-events: none;
-    
+
     @include animation(rotate-wheel 3s linear infinite);
     @include animation-play-state(paused);
 
@@ -283,7 +283,7 @@ h1, h2, h3, h4, h5 {
   position: fixed;
   display: block;
   width: 250px;
-  height: 270px;
+  height: 306px;
   top: 2.9em;
   right: 1.7em;
   border-radius: $radius;
@@ -311,7 +311,7 @@ h1, h2, h3, h4, h5 {
   width: 100%;
   height: 46px;
   line-height: 46px;
-  margin-top: 2em;
+  margin-top: 1.2em;
   padding: 0;
   outline: none;
   cursor: pointer;

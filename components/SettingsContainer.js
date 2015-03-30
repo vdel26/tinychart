@@ -8,7 +8,8 @@ var SettingsContainer = React.createClass({
     isOpen: React.PropTypes.bool.isRequired,
     types: React.PropTypes.array.isRequired,
     switchChartType: React.PropTypes.func.isRequired,
-    resetData: React.PropTypes.func.isRequired
+    resetData: React.PropTypes.func.isRequired,
+    shareUrl: React.PropTypes.func.isRequired
   },
 
   componentDidUpdate: function () {
@@ -32,6 +33,7 @@ var SettingsContainer = React.createClass({
         <div className="SettingsContainer-content">
           <ChartSelector switchChartType={this.props.switchChartType} types={this.props.types} />
           <button className="SettingsContainer-button SettingsContainer-button--default" onClick={this.props.resetData}>Reset Data</button>
+          <button className="SettingsContainer-button SettingsContainer-button--default" onClick={this.props.shareUrl}>Share</button>
           <a className="SettingsContainer-button SettingsContainer-button--blue" download="chartpad.png" ref="download">Download Chart</a>
         </div>
       </div>
