@@ -43,7 +43,7 @@ var ExcelEditor = React.createClass({
     Array.prototype.forEach.call(rows, function (row, i) {
       var rowCells = row.querySelectorAll('td');
       return Array.prototype.map.call(rowCells, function (cell, j) {
-        if (!data.datasets[j]) { 
+        if (!data.datasets[j]) {
           data.datasets[j] = {};
           data.datasets[j].data = [];
         }
@@ -72,7 +72,7 @@ var ExcelEditor = React.createClass({
   },
 
   addNewRow: function () {
-    this.setState({ 
+    this.setState({
       nrows: ++this.state.nrows,
       data: this.getTableData()
     });
@@ -80,7 +80,7 @@ var ExcelEditor = React.createClass({
 
   deleteRow: function () {
     if (this.state.nrows === 2) return;
-    this.setState({ 
+    this.setState({
       nrows: --this.state.nrows,
       data: this.getTableData()
     }, this.onNewData);
@@ -103,7 +103,7 @@ var ExcelEditor = React.createClass({
 
   render: function () {
 
-    // table header 
+    // table header
     var header = [(<th></th>)];
     for (var j=0; j<this.state.ncols; j++) {
       header.push(<th scope='col'>DATASET {j+1}</th>);
@@ -112,13 +112,17 @@ var ExcelEditor = React.createClass({
     // generate table rows from initial data
     var rows = [];
     for (var i=0; i<this.state.nrows; i++) {
-      var rowHeader = [ 
-        (<th className='ExcelEditor-header' scope='row' contentEditable="true" onKeyUp={this.onKeyUp}>{this.state.data.labels[i]}</th>) 
+      var rowHeader = [
+        (<th className='ExcelEditor-header' scope='row' contentEditable="true" onKeyUp={this.onKeyUp}>{this.state.data.labels[i]}</th>)
         ];
       var row = this.state.data.datasets.map(function (dataset, idx) {
         if (idx >= this.state.ncols) return;
         return (
-          <td className='ExcelEditor-cell' contentEditable='true' onKeyUp={this.onKeyUp}>
+          // workaround with "key" to fix contentEditable issue:
+          // when resetting, cells didnt update since with contentEditable
+          // DOM content is different than visible content. Adding a random key
+          // forces the cell to update every time the parent component rerenders
+          <td className='ExcelEditor-cell' contentEditable='true' onKeyUp={this.onKeyUp} key={Math.floor(Math.random()*1000)}>
             {dataset.data[i] ? dataset.data[i] : <br />}
           </td>
         );
