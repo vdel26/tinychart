@@ -71,6 +71,7 @@ module.exports = {
     var compressed = lz.compressToEncodedURIComponent(JSON.stringify(data));
     var url = '#/share/' + compressed;
     window.history.replaceState({}, 'share', url);
+    return url;
   }
 
 };

@@ -299,6 +299,9 @@ h1, h2, h3, h4, h5 {
   opacity: 1;
   @include transform(scale(1) translateY(0));
 }
+.SettingsContainer.is-sharing {
+  height: 346px;
+}
 .SettingsContainer-content {
   @include display(flex);
   @include flex-direction(column);
@@ -308,6 +311,8 @@ h1, h2, h3, h4, h5 {
   padding: 2em 2em;
 }
 .SettingsContainer-button {
+  display: block;
+  position: relative;
   width: 100%;
   height: 46px;
   line-height: 46px;
@@ -351,6 +356,55 @@ h1, h2, h3, h4, h5 {
   &:active {
     @include background-image(linear-gradient(24deg, #58ACD9 0%, #7BA8FF 100%));
     box-shadow: inset 0px -1px 0px 0px rgba(255,255,255,0.12);
+  }
+}
+.SettingsContainer-input {
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  height: 0;
+  opacity: 0;
+  margin-top: -3px;
+  padding: 3px 0.4em 0 0.4em;
+  outline: none;
+  cursor: text;
+  font-size: 0.8em;
+  color: $icon-dark-grey;
+  font-family: $font;
+  background: $white;
+  border: 1px solid #B8C6D3;
+  border-radius: 0 0 $radius $radius;
+  @include transition(400ms all cubic-bezier(0.34,1.61,0.7,1));
+
+  &.is-sharing {
+    height: 40px;
+    opacity: 1;
+  }
+}
+
+#share > span,
+#share::after {
+  display: block;
+  @include transition(transform 0.3s, opacity 0.3s);
+  @include transition-timing-function(cubic-bezier(0.2, 1, 0.3, 1));
+}
+#share::after {
+  content: attr(data-text);
+  color: $positive-green;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  opacity: 0;
+  @include transform(translateY(25%));
+}
+#share.is-sharing {
+  > span {
+    opacity: 0;
+    @include transform(translateY(-25%));
+  }
+  &::after {
+    opacity: 1;
+    @include transform(translateY(0));
   }
 }
 

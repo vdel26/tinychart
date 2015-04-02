@@ -14,21 +14,31 @@ var App = React.createClass({
   getInitialState: function () {
     return {
       settingsIsOpen: false,
-      currentChartType: 'line'
+      settingsIsSharing: false,
+      currentChartType: 'line',
+      url: ''
     };
   },
 
   newData: function (data) {
     this.props.store.update(data);
+    this.setState({ settingsIsSharing: false, url: ''});
+    Utils.setUrl('');
+    ga('send', 'event', 'user', 'update');
   },
 
   resetData: function () {
     this.props.store.resetData();
+    this.setState({ settingsIsSharing: false, url: ''});
     Utils.setUrl('');
+    ga('send', 'event', 'user', 'reset');
   },
 
   shareUrl: function () {
-    Utils.setUrl(this.props.store.getData());
+    var url = Utils.setUrl(this.props.store.getData());
+    var fullUrl = window.location.origin + '/' + url;
+    this.setState({ settingsIsSharing: true, url: fullUrl });
+    ga('send', 'event', 'user', 'share', url);
   },
 
   openSettings: function () {
@@ -58,10 +68,12 @@ var App = React.createClass({
           <MainContainer store={this.props.store} openSettings={this.openSettings} currentChartType={this.state.currentChartType} />
         </div>
         <SettingsContainer isOpen={this.state.settingsIsOpen}
+                           isSharing={this.state.settingsIsSharing}
                            types={CHART_TYPES}
                            switchChartType={this.switchChartType}
                            resetData={this.resetData}
-                           shareUrl={this.shareUrl} />
+                           shareUrl={this.shareUrl}
+                           url={this.state.url} />
       </div>
     );
   }
