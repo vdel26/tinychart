@@ -1,6 +1,6 @@
 {
   "name": "Tinychart",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "A simple tool to create quick exportable charts",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,7 @@
     "brace": "^0.4.0",
     "chart.js": "^1.0.1-beta.2",
     "lodash": "^2.4.1",
+    "lz-string": "^1.4.1",
     "react": "^0.12.1"
   },
   "devDependencies": {
